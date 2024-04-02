@@ -9,5 +9,9 @@ header{
       text-align: center;
 }
 mat-grid-tile {
-    background: lightblue;
+    float: left;
+    border: 1px solid #000;  
+    background-color: #FFF;
+    max-width: 50%;
+    
   }
