@@ -21,5 +21,4 @@ describe('FormularioRutinaComponent', () => {
     expect(component).toBeTruthy();
   });
 });
-export { FormularioRutinaComponent };
 

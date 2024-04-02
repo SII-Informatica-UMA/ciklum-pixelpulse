@@ -1,17 +1,28 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Ejercicio } from '../entities/ejercicio';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Ejercicio } from "../entities/ejercicio";
+import { BackendFakeService } from "./backend.fake.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EjercicioService {
-  private apiUrl = 'http://tu-api.com/ejercicios'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private backend: BackendFakeService) {}
 
   getEjercicios(): Observable<Ejercicio[]> {
-    return this.http.get<Ejercicio[]>(this.apiUrl);
+    return this.backend.getEjercicios();
+  }
+
+  editarEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
+    return this.backend.putEjercicio(ejercicio);
+  }
+
+  eliminarEjercicio(id: number): Observable<void> {
+    return this.backend.deleteEjercicio(id);
+  }
+
+  añadirEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
+    return this.backend.postEjercicio(ejercicio);
   }
 }
