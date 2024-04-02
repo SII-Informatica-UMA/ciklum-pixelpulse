@@ -15,3 +15,31 @@ mat-grid-tile {
     max-width: 50%;
     
   }
+  .container {
+    display: flex;
+    height: 50vh; /* Ajusta la altura a la mitad de la pantalla */
+    background-color: rgb(57, 67, 64);
+    border-radius: 2%;
+    color: #000;
+}
+.ejercicios, .descripciones {
+    width: 50%; /* Ancho dividido entre la lista y las descripciones */
+    overflow-y: auto; /* Añade scroll si es necesario */
+}
+.ejercicios ul {
+    list-style: none;
+    padding: 0;
+}
+.ejercicios li {
+    padding: 10px;
+    cursor: pointer;
+}
+.ejercicios li:hover {
+    background-color: #f0f0f0;
+}
+.descripciones {
+    padding: 10px;
+}
+.descripciones h3, .descripciones p {
+    margin: 0 0 10px 0;
+}

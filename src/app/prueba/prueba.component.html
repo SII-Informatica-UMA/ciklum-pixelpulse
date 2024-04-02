@@ -3,15 +3,24 @@
 <body>
     <p>prueba works!</p>
 
-    <mat-grid-list cols="1" >
+    <div class="container">
+      <div class="ejercicios">
         @for (ejercicio of ejerprueba.getEjercicio(); track ejercicio) {
-          <mat-grid-tile class="tabla-ejercicios" 
-            >Nombre:{{ejercicio.nombre}} 
-            <br>
-            Desripcion:{{ejercicio.descripcion}}
-            <br>
-            Material:{{ejercicio.material}}
-        </mat-grid-tile>
+          
+            <li (click)="ejerprueba.seleccionarEjercicio(ejercicio)">  Nombre:{{ejercicio.nombre}} </li>
+            
+           
         }
-      </mat-grid-list>
+      </div>
+      <div class="descripciones" *ngIf="ejerprueba.ejercicioSeleccionado">
+        <h3>Selecciona un ejercicio</h3>
+        <p>Al seleccionar un ejercicio de la lista, aquí aparecerá su descripción.</p>
+        <h3>{{ ejerprueba.ejercicioSeleccionado?.nombre }}</h3>
+        <p> Descripcion:{{ejerprueba.ejercicioSeleccionado?.descripcion }}</p>
+        <p> Dificultad:{{ejerprueba.ejercicioSeleccionado?.dificultad }}</p>
+        
+      </div>
+  </div>
+  
+   
 </body>

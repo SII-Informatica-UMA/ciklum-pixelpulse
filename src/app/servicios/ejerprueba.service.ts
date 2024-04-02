@@ -27,7 +27,19 @@ export class EjerpruebaService {
           dificultad: "Facil",
           multimedia: ["string[]"],
     }
+  ,{
+      id: 3,
+      nombre: "Flexiones de pecho",
+      descripcion: "Ejercicio para fortalecer el pecho y los brazos.",
+      observaciones: "Realizar con la espalda recta y los codos cerca del cuerpo.",
+      tipo: "Fuerza",
+      musculosTrabajados: "Pectorales, tríceps, deltoides",
+      material: "Ninguno",
+      dificultad: "Intermedia",
+      multimedia: ["imagen2.jpg", "video2.mp4"]
+    }
   ];
+  ejercicioSeleccionado?:   Ejercicio;
   constructor() { }
 
   getEjercicio(): Ejercicio [] {
@@ -43,7 +55,10 @@ export class EjerpruebaService {
     let indice = this.ejercicios.findIndex(c => c.id == contacto.id);
     this.ejercicios[indice] = contacto;
   }
-
+  seleccionarEjercicio(ejercicio: Ejercicio){
+    this.ejercicioSeleccionado= ejercicio;
+    
+  }
   eliminarEjercicio(id: number) {
     let indice = this.ejercicios.findIndex(c => c.id == id);
     this.ejercicios.splice(indice, 1);
