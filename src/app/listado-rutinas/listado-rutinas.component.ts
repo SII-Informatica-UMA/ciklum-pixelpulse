@@ -3,7 +3,7 @@ import { RutinaService } from '../servicios/rutina.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { Rutina, RutinaImpl } from '../entities/rutina';
-import { FormularioRutinaComponent } from '../formulario-rutinas/formulario-rutina.component.spec';
+import { FormularioRutinaComponent } from '../formulario-rutinas/formulario-rutinas.component';
 
 @Component({
   selector: 'app-listado-rutina',
