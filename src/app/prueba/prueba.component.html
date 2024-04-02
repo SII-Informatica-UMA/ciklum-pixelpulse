@@ -1,4 +1,17 @@
+<header>Lista de ejercicios</header>
+
 <body>
     <p>prueba works!</p>
-</body>
 
+    <mat-grid-list cols="1"  >
+        @for (ejercicio of ejerprueba.getEjercicio(); track ejercicio) {
+          <mat-grid-tile class="tabla-ejercicios" rowHeight="4:1"
+            >Nombre:{{ejercicio.nombre}} 
+            <br>
+            Desripcion:{{ejercicio.descripcion}}
+            <br>
+            Material:{{ejercicio.material}}
+        </mat-grid-tile>
+        }
+      </mat-grid-list>
+</body>

@@ -1,3 +1,13 @@
-p{
-    background-color: wheat;
+header{
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(165, 183, 72);
+      font-weight: bolder;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      margin-top: 20px; 
+      margin-bottom: 80px;
+      font-size: 50px;
+      text-align: center;
 }
+mat-grid-tile {
+    background: lightblue;
+  }
