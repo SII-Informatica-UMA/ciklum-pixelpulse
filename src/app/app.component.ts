@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
 import { EjerciciosComponent } from './ejercicios/ejercicios.component';
 import { CommonModule } from '@angular/common';
+import { BotonesService } from './servicios/botones.service';
+import { PruebaComponent } from './prueba/prueba.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,MenuPrincipalComponent,EjerciciosComponent,CommonModule],
+  imports: [RouterOutlet,MenuPrincipalComponent,EjerciciosComponent,CommonModule,RouterLink,PruebaComponent],
+  providers: [BotonesService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
+  constructor(private serviceBotones: BotonesService) { }
+
    menuPrin: boolean =  true;
    showEjercios: boolean =  true;
    showRutinas: boolean =  true;
