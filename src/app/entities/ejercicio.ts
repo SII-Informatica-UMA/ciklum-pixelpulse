@@ -9,3 +9,4 @@ export interface Ejercicio {
     dificultad: string;
     multimedia: string[];
   }
+  

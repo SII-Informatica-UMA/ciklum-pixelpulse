@@ -1,16 +1,28 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Rutina } from '../rutinas/rutina';
+import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
+import { Rutina } from "../entities/rutina";
+import { BackendFakeService } from "./backend.fake.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RutinaService {
-  private apiUrl = 'http://tu-api.com/rutinas'; 
-  constructor(private http: HttpClient) { }
+
+  constructor(private backend: BackendFakeService) {}
 
   getRutinas(): Observable<Rutina[]> {
-    return this.http.get<Rutina[]>(this.apiUrl);
+    return this.backend.getRutinas();
+  }
+
+  editarRutina(rutina: Rutina): Observable<Rutina> {
+    return this.backend.putRutina(rutina);
+  }
+
+  eliminarRutina(nombre: string): Observable<void> {
+    return this.backend.deleteRutina(nombre);
+  }
+
+  añadirRutina(rutina: Rutina): Observable<Rutina> {
+    return this.backend.postRutina(rutina);
   }
 }
