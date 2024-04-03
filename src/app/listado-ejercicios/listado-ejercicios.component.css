@@ -25,7 +25,7 @@ border-radius:20px;
   position: relative;
 }
 body {   /*Solo es para el fondo de pantalla, no creo que se tenga que volver a tocar, Para El resto de elementos hay que volver a poner el brigtness a 1*/
-background-image: url('../../assets/backgroundMAin.png');
+
 backdrop-filter: brightness(0.4);
 background-size: cover;
 background-position: center;

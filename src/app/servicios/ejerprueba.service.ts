@@ -38,6 +38,17 @@ export class EjerpruebaService {
       dificultad: "Intermedia",
       multimedia: ["imagen2.jpg", "video2.mp4"]
     }
+    ,{
+      id: 3,
+      nombre: "Sentallidas",
+      descripcion: "Ejercicio para fortalecer las piernas.",
+      observaciones: "Realizar con la espalda recta y flexionando las rodillas unos 90 grados.",
+      tipo: "Fuerza",
+      musculosTrabajados: "Gluteos, Isquiotibiales, Cuadriceps",
+      material: "Ninguno",
+      dificultad: "Facil",
+      multimedia: ["string[]"]
+    }
   ];
   ejercicioSeleccionado?:   Ejercicio;
   constructor() { }

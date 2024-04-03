@@ -14,8 +14,6 @@
   .heading {
     font-size:medium;
     filter: brightness(1);
-    -webkit-text-stroke-width: 0px;
-  -webkit-text-stroke-color: rgb(0, 0, 0);
     font-weight: bolder;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-top: 20px; 
@@ -27,7 +25,7 @@
   
   .buttons {
     
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     filter: brightness(1);
     margin-bottom: 20px;
     text-align: center; 
@@ -36,8 +34,7 @@
 
 body {   /*Solo es para el fondo de pantalla, no creo que se tenga que volver a tocar, Para El resto de elementos hay que volver a poner el brigtness a 1*/
   background: url('/../assets/backgroundMAin.png');
-  filter: brightness(0.8
-  );
+  filter: brightness(0.8);
   background-size: cover;
 background-position: center;
 background-repeat: no-repeat;

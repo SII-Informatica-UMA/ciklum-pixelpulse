@@ -2,13 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { RutinaService } from '../servicios/rutina.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Rutina, RutinaImpl } from '../entities/rutina';
 import { FormularioRutinaComponent } from '../formulario-rutinas/formulario-rutinas.component';
 
 @Component({
   selector: 'app-listado-rutina',
+  standalone: true,
+  imports: [CommonModule,RouterOutlet,RouterLink,RouterLinkActive],
   templateUrl: './listado-rutinas.component.html',
   styleUrls: ['./listado-rutinas.component.css']
+  
 })
 export class ListadoRutinaComponent implements OnInit {
   rutinas: Rutina[] = [];

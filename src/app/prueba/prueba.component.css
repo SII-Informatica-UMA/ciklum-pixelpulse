@@ -1,19 +1,30 @@
 header{
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: rgb(165, 183, 72);
+    background-color: rgba(53,58,64,255);
+    color: white;
       font-weight: bolder;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
-      margin-top: 20px; 
-      margin-bottom: 80px;
       font-size: 50px;
-      text-align: center;
+      padding-left: 40px;
+      border-bottom:2px solid black;
+      
+      text-align: left;
+}
+body{
+    background: url('/../assets/backgroundMAin.png');
+    filter: brightness(0.8);
+    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+    height: 91.9vh; 
 }
 
   .container {
     display: flex;
     height: 50vh; /* Ajusta la altura a la mitad de la pantalla */
-    background-color: rgb(57, 67, 64);
-    border-radius: 2%;
+    background-color: rgb(217, 217, 217);
+    border-radius: 8px;
     color: #000;
 }
 .ejercicios, .descripciones {
