@@ -2,6 +2,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { EjerpruebaService } from '../servicios/ejerprueba.service';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 export interface Tile {
   color: string;
   cols: number;
@@ -12,7 +13,7 @@ export interface Tile {
   selector: 'app-prueba',
   standalone: true,
  
-  imports: [MatGridListModule,CommonModule],
+  imports: [MatGridListModule,CommonModule,RouterOutlet,RouterLink,RouterLinkActive],
   providers:[EjerpruebaService],
   templateUrl: './prueba.component.html',
   styleUrl: './prueba.component.css'

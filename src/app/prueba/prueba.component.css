@@ -8,13 +8,7 @@ header{
       font-size: 50px;
       text-align: center;
 }
-mat-grid-tile {
-    float: left;
-    border: 1px solid #000;  
-    background-color: #FFF;
-    max-width: 50%;
-    
-  }
+
   .container {
     display: flex;
     height: 50vh; /* Ajusta la altura a la mitad de la pantalla */

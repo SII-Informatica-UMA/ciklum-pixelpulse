@@ -1,8 +1,12 @@
 <header>Lista de ejercicios</header>
 
 <body>
-    <p>prueba works!</p>
-
+  <nav>
+    <div class="buttons mt-auto">
+    
+      <a ariaCurrentWhenActive="page" routerLink="/menu" routerLinkActive="active" class="btn btn-lg btn-warning">Volver al menu </a>
+    </div>
+  </nav>
     <div class="container">
       <div class="ejercicios">
         @for (ejercicio of ejerprueba.getEjercicio(); track ejercicio) {

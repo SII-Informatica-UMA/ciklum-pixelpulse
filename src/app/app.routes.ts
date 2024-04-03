@@ -9,6 +9,7 @@ export const routes: Routes = [
 { path: 'ejercicios', component: ListadoEjercicioComponent },
 { path: 'rutinas', component: ListadoRutinaComponent },
 { path: '', component: MenuPrincipalComponent },
+{ path: 'menu', component: MenuPrincipalComponent },
 {path: 'prueba', component:PruebaComponent}];
 
 NgModule({
