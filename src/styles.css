@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {   /*Solo es para el fondo de pantalla, no creo que se tenga que volver a tocar, Para El resto de elementos hay que volver a poner el brigtness a 1*/
     background: url('/../assets/backgroundMAin.png');
-    backdrop-filter: brightness(0.4);
     background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
