@@ -22,7 +22,7 @@ export class EjercicioService {
     return this.backend.deleteEjercicio(id);
   }
 
-  añadirEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
+  anadirEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
     return this.backend.postEjercicio(ejercicio);
   }
 }

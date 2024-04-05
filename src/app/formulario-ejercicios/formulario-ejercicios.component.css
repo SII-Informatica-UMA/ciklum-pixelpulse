@@ -1,3 +1,22 @@
-h2{
-  background-color: wheat;
+.container {
+  margin-top: 50px;
+}
+
+.col-12 {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 5px;
+}
+
+.btn-primary {
+  margin-top: 20px;
 }

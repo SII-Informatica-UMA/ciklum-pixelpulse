@@ -29,7 +29,7 @@ export class ListadoRutinaComponent implements OnInit {
     });
   }
 
-  añadirRutina(): void {
+  anadirRutina(): void {
     let ref = this.modalService.open(FormularioRutinaComponent);
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.rutina = new RutinaImpl();

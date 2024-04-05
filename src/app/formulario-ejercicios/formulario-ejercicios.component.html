@@ -1,2 +1,39 @@
-<h2>Lista de Ejercicios</h2>
-
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center">Formulario de Ejercicio</h1>
+        <form>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="ejercicio.nombre" name="nombre">
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea class="form-control" id="descripcion" [(ngModel)]="ejercicio.descripcion" name="descripcion"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="observaciones" class="form-label">Observaciones</label>
+            <textarea class="form-control" id="observaciones" [(ngModel)]="ejercicio.observaciones" name="observaciones"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo</label>
+            <input type="text" class="form-control" id="tipo" [(ngModel)]="ejercicio.tipo" name="tipo">
+          </div>
+          <div class="mb-3">
+            <label for="musculosTrabajados" class="form-label">Músculos Trabajados</label>
+            <input type="text" class="form-control" id="musculosTrabajados" [(ngModel)]="ejercicio.musculosTrabajados" name="musculosTrabajados">
+          </div>
+          <div class="mb-3">
+            <label for="material" class="form-label">Material</label>
+            <input type="text" class="form-control" id="material" [(ngModel)]="ejercicio.material" name="material">
+          </div>
+          <div class="mb-3">
+            <label for="multimedia" class="form-label">Multimedia</label>
+            <input type="text" class="form-control" id="multimedia" [(ngModel)]="ejercicio.multimedia" name="multimedia">
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="guardarEjercicio()">Guardar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

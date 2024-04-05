@@ -1,1 +1,47 @@
-<h2>Lista de Rutinas</h2>
+<div class="modal-header">
+    <h4 class="modal-title">{{ accion }} Rutina</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" [(ngModel)]="rutina.nombre" name="nombre" required>
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea class="form-control" id="descripcion" [(ngModel)]="rutina.descripcion" name="descripcion" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="observaciones">Observaciones</label>
+        <textarea class="form-control" id="observaciones" [(ngModel)]="rutina.observaciones" name="observaciones" required></textarea>
+      </div>
+      <div class="form-group" *ngFor="let ejercicio of rutina.ejercicios; let i = index">
+        <label for="ejercicio{{ i }}">Ejercicio {{ i + 1 }}</label>
+        <select class="form-control" id="ejercicio{{ i }}" [(ngModel)]="rutina.ejercicios[i].ejercicio" name="ejercicio{{ i }}" required>
+          <option *ngFor="let ejercicio of ejercicios" [ngValue]="ejercicio">{{ ejercicio.id }}</option>
+        </select>
+        <div class="form-row">
+          <div class="form-group col">
+            <label for="series{{ i }}">Series</label>
+            <input type="number" class="form-control" id="series{{ i }}" [(ngModel)]="rutina.ejercicios[i].series" name="series{{ i }}" required>
+          </div>
+          <div class="form-group col">
+            <label for="repeticiones{{ i }}">Repeticiones</label>
+            <input type="number" class="form-control" id="repeticiones{{ i }}" [(ngModel)]="rutina.ejercicios[i].repeticiones" name="repeticiones{{ i }}" required>
+          </div>
+          <div class="form-group col">
+            <label for="duracion{{ i }}">Duración (minutos)</label>
+            <input type="number" class="form-control" id="duracion{{ i }}" [(ngModel)]="rutina.ejercicios[i].duracionMinutos" name="duracion{{ i }}" required>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Cancelar</button>
+    <button type="button" class="btn btn-primary" (click)="guardarRutina()">Guardar</button>
+  </div>
+  

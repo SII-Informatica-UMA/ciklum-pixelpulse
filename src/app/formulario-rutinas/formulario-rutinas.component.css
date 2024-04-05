@@ -1,3 +1,24 @@
-h2{
-  background-color: wheat;
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.btn {
+  margin-top: 10px;
 }

@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { EjercicioService } from '../servicios/ejercicio.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Ejercicio, EjercicioImpl } from '../entities/ejercicio';
 import { FormularioEjercicioComponent } from '../formulario-ejercicios/formulario-ejercicios.component';
 
 @Component({
   selector: 'app-listado-ejercicio',
+  standalone: true,
+  imports: [CommonModule,RouterOutlet,RouterLink,RouterLinkActive],
   templateUrl: './listado-ejercicios.component.html',
   styleUrls: ['./listado-ejercicios.component.css']
 })
@@ -25,12 +28,12 @@ export class ListadoEjercicioComponent implements OnInit {
     });
   }
 
-  añadirEjercicio(): void {
+  anadirEjercicio(): void {
     let ref = this.modalService.open(FormularioEjercicioComponent);
     ref.componentInstance.accion = "Añadir";
     ref.componentInstance.ejercicio = new EjercicioImpl();
     ref.result.then((ejercicio: Ejercicio) => {
-      this.ejercicioService.añadirEjercicio(ejercicio).subscribe(() => {
+      this.ejercicioService.anadirEjercicio(ejercicio).subscribe(() => {
         this.actualizarEjercicios();
       });
     }, () => {});

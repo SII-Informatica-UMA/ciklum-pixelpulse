@@ -1,13 +1,51 @@
-<h2>Lista de Rutinas</h2>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listado de Rutinas</title>
+</head>
 <body>
-    <nav>
-        <div class="buttons mt-auto">
-
-            <a ariaCurrentWhenActive="page" routerLink="/menu" routerLinkActive="active"class="btn btn-lg btn-secondary">Volver al menu </a>
-
-
-        </div>
-    </nav>
-
+  <div class="header">
+    <h1>Listado de Rutinas</h1>
+  </div>
+  <div class="container">
+    <div class="rutinas-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Observaciones</th>
+            <th>Ejercicios</th>
+            <th>Acciones</th> <!-- Nueva columna para acciones -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rutina of rutinas">
+            <td>{{ rutina.nombre }}</td>
+            <td>{{ rutina.descripcion }}</td>
+            <td>{{ rutina.observaciones }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let ejercicio of rutina.ejercicios">
+                  {{ ejercicio.ejercicio.nombre }} {{ ejercicio.series }} series de {{ ejercicio.repeticiones }} repeticiones, {{ ejercicio.duracionMinutos }} minutos
+                </li>
+              </ul>
+            </td>
+            <td>
+              <!-- Botón de editar -->
+              <button type="button" class="btn btn-primary" (click)="editarRutina(rutina)">Editar</button>
+              <!-- Botón de eliminar -->
+              <button type="button" class="btn btn-danger" (click)="eliminarRutina(rutina.nombre)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="acciones">
+        <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="anadirRutina()">Añadir rutina</button>
+    </div>
+  </div>
 </body>
+</html>
