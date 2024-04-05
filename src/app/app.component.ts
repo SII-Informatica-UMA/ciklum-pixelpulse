@@ -4,12 +4,11 @@ import { MenuPrincipalComponent } from './menu-principal/menu-principal.componen
 import { ListadoEjercicioComponent } from './listado-ejercicios/listado-ejercicios.component';
 import { CommonModule } from '@angular/common';
 import { BotonesService } from './servicios/botones.service';
-import { PruebaComponent } from './prueba/prueba.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,MenuPrincipalComponent,CommonModule,RouterLink,PruebaComponent],
+  imports: [RouterOutlet,MenuPrincipalComponent,CommonModule,RouterLink],
   providers: [BotonesService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
