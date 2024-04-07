@@ -5,10 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Listado de Rutinas</title>
 </head>
-<body>
+
   <div class="header">
     <h1>Listado de Rutinas</h1>
+    <nav>
+      <div class="buttons mt-auto">
+      
+        <a ariaCurrentWhenActive="page" routerLink="/menu" routerLinkActive="active" class="btn btn-lg btn-secondary">Menu principal</a>
+      </div>
+    </nav>
   </div>
+  <body>
+  <div class = "fondo">
   <div class="container">
     <div class="rutinas-list">
       <table>
@@ -47,5 +55,6 @@
         <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="anadirRutina()">Añadir rutina</button>
     </div>
   </div>
+</div>
 </body>
 </html>

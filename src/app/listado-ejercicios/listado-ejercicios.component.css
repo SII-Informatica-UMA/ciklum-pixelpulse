@@ -1,31 +1,44 @@
 /* Estilos para el encabezado */
-header {
-  background: url('/../assets/backgroundMAin.png');
+.header {
   background-color: rgba(53, 58, 64, 255);
   color: white;
   font-weight: bolder;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 50px;
   padding-left: 40px;
+  padding-top: 5px;
   border-bottom: 2px solid black;
   text-align: left;
+  display: flex;
+  
 }
+
+
+.buttons {
+    
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  filter: brightness(1);
+  text-align: right; 
+  position: relative;
+  left: 1350px
+}
+
 
 /* Estilos para el cuerpo */
 body {
-  filter: brightness(0.8);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 0; /* Remove default body margin */
-  padding: 0; /* Remove default body padding */
-  height: 91.9vh; 
+  background: url('/../assets/backgroundMAin.png');
+   background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+position: absolute;
+width: 201.5vh;
+height:91.4vh;
 }
 
 
 
 .container {
-  display: flex;
+  margin-top: 150px;
   height: 45vh; /* Ajusta la altura a la mitad de la pantalla */
   background-color: rgb(217, 217, 217);
   border-radius: 8px;
