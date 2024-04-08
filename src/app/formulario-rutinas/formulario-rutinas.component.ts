@@ -24,6 +24,9 @@ export class FormularioRutinaComponent {
   get rutina () {
     return this._rutina;
   }
+  ngOnInit(): void {
+    this.cargarEjercicios();
+  }
   abrirFormulario(): void {
     const modalRef = this.modalService.open(FormularioRutinaComponent);
     modalRef.componentInstance.accion = 'Añadir';
