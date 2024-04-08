@@ -35,7 +35,7 @@
             <td>{{ rutina.descripcion }}</td>
             <td>{{ rutina.observaciones }}</td>
             <td>
-              <ul>
+              <ul style=" overflow-y: auto;">
                 <li *ngFor="let ejercicio of rutina.ejercicios">
                   {{ ejercicio.ejercicio.nombre }} {{ ejercicio.series }} series de {{ ejercicio.repeticiones }} repeticiones, {{ ejercicio.duracionMinutos }} minutos
                 </li>

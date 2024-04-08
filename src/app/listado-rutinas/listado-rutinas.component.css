@@ -23,14 +23,12 @@
 }
 
 .container {
-  display: flex;
-  height: 58vh;
-  padding-top: 40px;
-  padding-bottom: 40px;
   margin-top: 150px;
+  height: 60vh; /* Ajusta la altura a la mitad de la pantalla */
   background-color: rgb(217, 217, 217);
   border-radius: 8px;
   color: #000;
+  overflow-y: auto;
 }
 
 body {
@@ -39,12 +37,12 @@ body {
 background-position: center;
 background-repeat: no-repeat;
 position: absolute;
-width: 201.5vh;
-height:91.4vh;
+width: 200vh;
+height:100vh;
 }
 
 .rutinas-list {
-  width: 50%;
+ 
   overflow-y: auto;
 }
 
