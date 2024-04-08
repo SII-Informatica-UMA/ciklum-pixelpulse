@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Ejercicio } from "../entities/ejercicio";
 import { BackendFakeService } from "./backend.fake.service";
+import { BackendService } from "./backend.service";
 
 @Injectable({
   providedIn: 'root'

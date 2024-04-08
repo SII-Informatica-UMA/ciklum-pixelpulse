@@ -16,46 +16,50 @@
     </nav>
   </div>
   <body>
-<div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1 class="text-center">Listado de Ejercicios</h1>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Descripcion</th>
-              <th>Observaciones</th>
-              <th>Tipo</th>
-              <th>Musculos Trabajados</th>
-              <th>Material</th>
-              <th>Multimedia</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let ejercicio of ejercicios" class="align-middle">
-              <td>{{ ejercicio.id }}</td>
-              <td>{{ ejercicio.nombre }}</td>
-              <td>{{ ejercicio.descripcion }}</td>
-              <td>{{ ejercicio.observaciones }}</td>
-              <td>{{ ejercicio.tipo }}</td>
-              <td>{{ ejercicio.musculosTrabajados }}</td>
-              <td>{{ ejercicio.material }}</td>
-              <td>{{ ejercicio.multimedia }}</td>
-              <td>
-                <button class="btn btn-sm btn-outline-primary m-1" (click)="editarEjercicio(ejercicio)">
-                  <i class="bi bi-pencil-fill"></i> Editar
-                </button>
-                <button (click)="eliminarEjercicio(ejercicio.id)" class="btn btn-sm btn-outline-danger m-1">
-                  <i class="bi bi-trash-fill"></i> Eliminar
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="anadirEjercicio()">Añadir ejercicio</button>
+    <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <h1 class="text-center">Listado de Ejercicios</h1>
+              <div class="table-responsive" style="max-height: 800px; overflow-y: auto;">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th>ID</th>
+                              <th>Nombre</th>
+                              <th>Descripcion</th>
+                              <th>Observaciones</th>
+                              <th>Tipo</th>
+                              <th>Musculos Trabajados</th>
+                              <th>Material</th>
+                              <th>Multimedia</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let ejercicio of ejercicios" class="align-middle">
+                              <td>{{ ejercicio.id }}</td>
+                              <td>{{ ejercicio.nombre }}</td>
+                              <td>{{ ejercicio.descripcion }}</td>
+                              <td>{{ ejercicio.observaciones }}</td>
+                              <td>{{ ejercicio.tipo }}</td>
+                              <td>{{ ejercicio.musculosTrabajados }}</td>
+                              <td>{{ ejercicio.material }}</td>
+                              <td>{{ ejercicio.multimedia }}</td>
+                              <td>
+                                  <button class="btn btn-sm btn-outline-primary m-1" (click)="editarEjercicio(ejercicio)">
+                                      <i class="bi bi-pencil-fill"></i> Editar
+                                  </button>
+                                  <button (click)="eliminarEjercicio(ejercicio.id)" class="btn btn-sm btn-outline-danger m-1">
+                                      <i class="bi bi-trash-fill"></i> Eliminar
+                                  </button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="anadirEjercicio()">Añadir ejercicio</button>
+          </div>
       </div>
-    </div>
-</div>
+  </div>
+  
+  
