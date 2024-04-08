@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Ejercicio, EjercicioImpl } from '../entities/ejercicio';
 import { FormularioEjercicioComponent } from '../formulario-ejercicios/formulario-ejercicios.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-listado-ejercicio',
@@ -17,6 +19,8 @@ export class ListadoEjercicioComponent implements OnInit {
   ejercicios: Ejercicio[] = [];
 
   constructor(private ejercicioService: EjercicioService, private modalService: NgbModal) { }
+
+
 
   ngOnInit(): void {
     this.actualizarEjercicios();
