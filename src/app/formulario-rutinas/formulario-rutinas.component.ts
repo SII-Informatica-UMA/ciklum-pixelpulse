@@ -3,7 +3,7 @@ import { Rutina, RutinaImpl } from '../entities/rutina';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Ejercicio } from '../entities/ejercicio';
+import { Ejercicio,EjercicioImpl } from '../entities/ejercicio';
 import { EjercicioService } from '../servicios/ejercicio.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class FormularioRutinaComponent {
 
 
   constructor(public modal: NgbActiveModal,private ejercicioService: EjercicioService,private modalService: NgbModal) { }
+  // Añade una lista de ejercicios al componente
   get rutina () {
     return this._rutina;
   }
@@ -49,5 +50,24 @@ export class FormularioRutinaComponent {
     // Aquí puedes agregar validaciones necesarias antes de cerrar el modal
     this.modal.close(this.rutina);
   }
-  
+ anadirEjercicio(): void {
+  this.rutina.ejercicios.push({
+    series: 0,
+    repeticiones: 0,
+    duracionMinutos: 0,
+    ejercicio: new EjercicioImpl()
+  });
+}
+
+// Modifica el método que se llama cuando se envía el formulario
+enviarFormulario(): void {
+  let nuevaRutina = new RutinaImpl();
+  nuevaRutina.ejercicios = this.ejercicios.map(ejercicio => ({
+    ejercicio: ejercicio,
+    series: 0,
+    repeticiones: 0,
+    duracionMinutos: 0,
+  }));
+  // Aquí puedes enviar 'nuevaRutina' a tu servicio o hacer lo que necesites con ella
+}
 }

@@ -32,24 +32,12 @@ export class ListadoRutinaComponent implements OnInit {
 anadirRutina(): void {
   let ref = this.modalService.open(FormularioRutinaComponent);
   ref.componentInstance.accion = "Añadir";
-  let nuevaRutina = new RutinaImpl();
-  nuevaRutina.ejercicios = [{
-    ejercicio: {
-      id: 0,
-      nombre: '',
-      descripcion: '', 
-      observaciones: '',
-      tipo: '', 
-      musculosTrabajados: '', 
-      material: '',
-      dificultad: '',
-      multimedia: [], 
-    },
-    series: 0,
-    repeticiones: 0, 
-    duracionMinutos: 0, 
-  }];
-  ref.componentInstance.rutina = nuevaRutina;
+  ref.componentInstance.rutina = new RutinaImpl(); // La rutina se inicializa vacía
+  ref.result.then((rutina: Rutina) => {
+    if (rutina) {
+      this.rutinasService.añadirRutina(rutina).subscribe(() => this.actualizarRutinas());
+    }
+  });
 }
   
 
