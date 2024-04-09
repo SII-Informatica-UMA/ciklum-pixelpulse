@@ -9,7 +9,7 @@ import { BackendService } from "./backend.service";
 })
 export class EjercicioService {
 
-  constructor(private backend: BackendFakeService) {}
+  constructor(private backend: BackendService) {}
 
   getEjercicios(): Observable<Ejercicio[]> {
     return this.backend.getEjercicios();

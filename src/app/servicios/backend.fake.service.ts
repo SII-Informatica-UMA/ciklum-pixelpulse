@@ -2,9 +2,8 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { Rutina } from "../entities/rutina";
 import { Ejercicio } from "../entities/ejercicio";
-import { SECRET_JWT } from "../app.config";
 import { from } from "rxjs";
-import { FRONTEND_URI } from "../app.config";
+
 
 // Este servicio imita al backend pero utiliza localStorage para almacenar los datos
 

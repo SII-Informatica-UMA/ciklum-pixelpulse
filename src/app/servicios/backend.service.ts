@@ -3,7 +3,8 @@ import { Observable, map, of } from "rxjs";
 import { Rutina } from "../entities/rutina";
 import { Ejercicio } from "../entities/ejercicio";
 import { HttpClient } from "@angular/common/http";
-import { BACKEND_URI } from "../app.config";
+import { BACKEND_URI } from "../config/config";
+
 
 // Este servicio usa el backend real
 
