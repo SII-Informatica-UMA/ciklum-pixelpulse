@@ -13,6 +13,15 @@ import { BackendService } from "./backend.service";
 })
 export class UsuariosService {
   _rolCentro?: RolCentro;
+  private usuarioSesion: UsuarioSesion = {
+    id: 0,
+    nombre: "",
+    apellido1: "",
+    apellido2: "",
+    email: ``,
+    roles: [],
+    jwt: ''
+  }; // Almacena la información del usuario después del inicio de sesión
 
   constructor(private backend: BackendService) {}
 
@@ -102,6 +111,9 @@ export class UsuariosService {
     return this.backend.postUsuario(usuario);
   }
 
-
+  getUsuarioId(): Observable<string> {
+    // Devuelve el ID del usuario almacenado
+    return of(this.usuarioSesion.id.toString());
+  }
 
 }

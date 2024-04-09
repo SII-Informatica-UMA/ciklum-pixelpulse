@@ -4,7 +4,8 @@ import { Rutina } from "../entities/rutina";
 import { Ejercicio } from "../entities/ejercicio";
 import { HttpClient } from "@angular/common/http";
 import { BACKEND_URI } from "../config/config";
-
+import { UsuariosService } from "../services/usuarios.service";
+import { switchMap } from 'rxjs/operators';
 
 // Este servicio usa el backend real
 
@@ -13,7 +14,7 @@ import { BACKEND_URI } from "../config/config";
 })
 export class BackendService {
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient,private usuarioService: UsuariosService) {}
 
   getRutinas(): Observable<Rutina[]> {
     return this.httpClient.get<Rutina[]>(BACKEND_URI + '/Rutina');
@@ -36,25 +37,28 @@ export class BackendService {
   }
 
  
-  getEjercicios(): Observable<Ejercicio[]> {
-    return this.httpClient.get<Ejercicio[]>(BACKEND_URI + '/Ejercicio');
-  }
+  getEjercicios(entrenadorId: string): Observable<Ejercicio[]> {
+      return this.httpClient.get<Ejercicio[]>(`${BACKEND_URI}/ejercicio?entrenador=${entrenadorId}`);
+    }
 
-  postEjercicio(Ejercicio: Ejercicio): Observable<Ejercicio> {
-    return this.httpClient.post<Ejercicio>(BACKEND_URI + '/Ejercicio', Ejercicio);
-  }
 
-  putEjercicio(Ejercicio: Ejercicio): Observable<Ejercicio> {
-    return this.httpClient.put<Ejercicio>(BACKEND_URI + '/Ejercicio/' + Ejercicio.id, Ejercicio);
-  }
+ postEjercicio(Ejercicio: Ejercicio,entrenadorId: string): Observable<Ejercicio> {
+      return this.httpClient.post<Ejercicio>(`${BACKEND_URI}/ejercicio?entrenador=${entrenadorId}`, Ejercicio);
+}
 
-  deleteEjercicio(id: number): Observable<void> {
-    return this.httpClient.delete<void>(BACKEND_URI + '/Ejercicio/' + id);
-  }
 
-  getEjercicio(id: number): Observable<Ejercicio> {
-    return this.httpClient.get<Ejercicio>(BACKEND_URI + '/Ejercicio/' + id);
-  }
+  putEjercicio(idEjercicio: number, Ejercicio: Ejercicio,entrenadorId: string): Observable<Ejercicio> {
+      return this.httpClient.put<Ejercicio>(`${BACKEND_URI}/ejercicio/${idEjercicio}?entrenador=${entrenadorId}`, Ejercicio);
+}
+
+deleteEjercicio(idEjercicio: number,entrenadorId: string): Observable<void> {
+      return this.httpClient.delete<void>(`${BACKEND_URI}/ejercicio/${idEjercicio}?entrenador=${entrenadorId}`);
+ 
+}
+
+  getEjercicio(idEjercicio: number,entrenadorId: string): Observable<Ejercicio> {
+      return this.httpClient.get<Ejercicio>(`${BACKEND_URI}/ejercicio/${idEjercicio}?entrenador=${entrenadorId}`);
+}
   
   
 }
