@@ -14,42 +14,44 @@ export class EjercicioService {
   constructor(private backend: BackendService, private usuarioService: UsuariosService) {}
 
   getEjercicios(): Observable<Ejercicio[]> {
-    return this.usuarioService.getUsuarioId().pipe(
-      switchMap((entrenadorId) => {
-        return this.backend.getEjercicios(entrenadorId);
-      })
-    );
+    let entrenadorId = this.usuarioService.getUsuarioActualId();
+    if (entrenadorId === null) {
+      throw new Error('No se pudo obtener el ID del usuario');
+    }
+    return this.backend.getEjercicios(entrenadorId.toString());
   }
+  
 
   editarEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
-    return this.usuarioService.getUsuarioId().pipe(
-      switchMap((entrenadorId) => {
-        return this.backend.putEjercicio(ejercicio.id, ejercicio,entrenadorId);
-      })
-    );
+    let entrenadorId = this.usuarioService.getUsuarioActualId();
+    if (entrenadorId === null) {
+      throw new Error('No se pudo obtener el ID del usuario');
+    }
+    return this.backend.putEjercicio(ejercicio.id,ejercicio, entrenadorId.toString());
   }
+  
 
   eliminarEjercicio(id: number): Observable<void> {
-    return this.usuarioService.getUsuarioId().pipe(
-      switchMap((entrenadorId) => {
-        return this.backend.deleteEjercicio(id,entrenadorId);
-      })
-    );
+    let entrenadorId = this.usuarioService.getUsuarioActualId();
+  if (entrenadorId === null) {
+    throw new Error('No se pudo obtener el ID del usuario');
   }
+  return this.backend.deleteEjercicio(id, entrenadorId.toString());
+}
 
   anadirEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
-    return this.usuarioService.getUsuarioId().pipe(
-      switchMap((entrenadorId) => {
-        return this.backend.postEjercicio( ejercicio,entrenadorId);
-      })
-    );
+  let entrenadorId = this.usuarioService.getUsuarioActualId();
+  if (entrenadorId === null) {
+    throw new Error('No se pudo obtener el ID del usuario');
   }
+  return this.backend.postEjercicio(ejercicio, entrenadorId.toString());
+}
 
-  getEjercicio(idEjercicio: number): Observable<Ejercicio> {
-    return this.usuarioService.getUsuarioId().pipe(
-      switchMap((entrenadorId) => {
-        return this.backend.getEjercicio(idEjercicio,entrenadorId);
-      })
-    );
+getEjercicio(idEjercicio: number): Observable<Ejercicio> {
+  let entrenadorId = this.usuarioService.getUsuarioActualId();
+  if (entrenadorId === null) {
+    throw new Error('No se pudo obtener el ID del usuario');
   }
+  return this.backend.getEjercicio(idEjercicio, entrenadorId.toString());
+}
 }
