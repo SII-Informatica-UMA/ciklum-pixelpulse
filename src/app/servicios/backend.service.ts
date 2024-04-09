@@ -16,25 +16,25 @@ export class BackendService {
 
   constructor(private httpClient: HttpClient,private usuarioService: UsuariosService) {}
 
-  getRutinas(): Observable<Rutina[]> {
-    return this.httpClient.get<Rutina[]>(BACKEND_URI + '/Rutina');
+  getRutinas(entrenadorId: string): Observable<Rutina[]> {
+    return this.httpClient.get<Rutina[]>(`${BACKEND_URI}/rutina?entrenador=${entrenadorId}`);
   }
 
-  postRutina(Rutina: Rutina): Observable<Rutina> {
-    return this.httpClient.post<Rutina>(BACKEND_URI + '/Rutina', Rutina);
-  }
+ postRutina(rutina: Rutina, entrenadorId: string): Observable<Rutina> {
+  return this.httpClient.post<Rutina>(`${BACKEND_URI}/rutina?entrenador=${entrenadorId}`, rutina);
+}
 
-  putRutina(Rutina: Rutina): Observable<Rutina> {
-    return this.httpClient.put<Rutina>(BACKEND_URI + '/Rutina/' + Rutina.nombre, Rutina);
-  }
+getRutina(nombre: string, entrenadorId: string): Observable<Rutina> {
+  return this.httpClient.get<Rutina>(`${BACKEND_URI}/rutina/${nombre}?entrenador=${entrenadorId}`);
+}
 
-  deleteRutina(nombre: String): Observable<void> {
-    return this.httpClient.delete<void>(BACKEND_URI + '/Rutina/' + nombre);
-  }
+putRutina(nombre: string, rutina: Rutina, entrenadorId: string): Observable<Rutina> {
+  return this.httpClient.put<Rutina>(`${BACKEND_URI}/rutina/${nombre}?entrenador=${entrenadorId}`, rutina);
+}
 
-  getRutina(nombre: String): Observable<Rutina> {
-    return this.httpClient.get<Rutina>(BACKEND_URI + '/Rutina/' + nombre);
-  }
+deleteRutina(nombre: string, entrenadorId: string): Observable<void> {
+  return this.httpClient.delete<void>(`${BACKEND_URI}/rutina/${nombre}?entrenador=${entrenadorId}`);
+}
 
  
   getEjercicios(entrenadorId: string): Observable<Ejercicio[]> {
