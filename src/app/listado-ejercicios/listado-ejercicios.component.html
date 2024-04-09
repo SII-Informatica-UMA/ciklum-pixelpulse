@@ -9,13 +9,19 @@
   
   <body>
     <div class="header">
-        <h1>Listado de Ejercicios</h1>
+        <h1>Administracion de Ejercicios</h1>
         
-        <nav>
-          <div class="buttons mt-auto">
-            <a ariaCurrentWhenActive="page" routerLink="/menu-principal" routerLinkActive="active" class="btn btn-lg btn-secondary">Menu principal</a>
-          </div>
-        </nav>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a ariaCurrentWhenActive="page" routerLink="/menu-principal" routerLinkActive="active" class="nav-link">Menu</a>
+            </li>
+            <li class="nav-item">
+              <a ariaCurrentWhenActive="page" routerLink="/rutinas" routerLinkActive="active" class="nav-link">Rutinas</a>
+            </li>
+          </ul>
       </div>
     <div class="container">
       <div class="row">
@@ -64,5 +70,8 @@
           </div>
       </div>
   </div>
+  
+  </body>
+</html>
   
   

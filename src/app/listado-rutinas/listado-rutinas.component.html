@@ -7,17 +7,23 @@
 </head>
 
   <div class="header">
-    <h1>Listado de Rutinas</h1>
-    <nav>
-      <div class="buttons mt-auto">
-      
-        <a ariaCurrentWhenActive="page" routerLink="/menu-principal" routerLinkActive="active" class="btn btn-lg btn-secondary">Menu principal</a>
-      </div>
-    </nav>
+    <h1>Administracion de Rutinas</h1>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a ariaCurrentWhenActive="page" routerLink="/menu-principal" routerLinkActive="active" class="nav-link" >Menu</a>
+      </li>
+      <li class="nav-item">
+        <a ariaCurrentWhenActive="page" routerLink="/ejercicios" routerLinkActive="active" class="nav-link">Ejercicios</a>
+      </li>
+    </ul>
   </div>
   <body>
   <div class = "fondo">
   <div class="container">
+    <h1 class="text-center" >Listado de Rutinas</h1>
     <div class="rutinas-list">
       <table>
         <thead>

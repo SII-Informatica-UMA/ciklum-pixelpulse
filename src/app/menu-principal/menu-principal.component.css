@@ -1,5 +1,5 @@
 .container-fluid.main-container {
-    height: 100vh; /*Se centra en la pantalla*/
+    height: 90vh; /*Se centra en la pantalla*/
   }
 
 .col-md-6{
@@ -35,11 +35,10 @@
 
 body {   /*Solo es para el fondo de pantalla, no creo que se tenga que volver a tocar, Para El resto de elementos hay que volver a poner el brigtness a 1*/
   background: url('/../assets/backgroundMAin.png');
-  filter: brightness(0.8);
   background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
   margin: 0; /* Remove default body margin */
   padding: 0; /* Remove default body padding */
-  height: 100vh;  
+  height: 95vh;  
 }
