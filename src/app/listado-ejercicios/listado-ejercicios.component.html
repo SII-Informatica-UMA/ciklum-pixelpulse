@@ -34,6 +34,7 @@
                               <th>Tipo:</th>
                               <th>Musculos Trabajados:</th>
                               <th>Material:</th>
+                              <th>Dificultad</th>
                               <th>Multimedia:</th>
                               <th></th>
                           </tr>
@@ -47,6 +48,7 @@
                               <td>{{ ejercicio.tipo }}</td>
                               <td>{{ ejercicio.musculosTrabajados }}</td>
                               <td>{{ ejercicio.material }}</td>
+                              <td>{{ ejercicio.dificultad }}</td>
                               <td>{{ ejercicio.multimedia[0] }}</td>
                               <td>
                                   <button class="btn btn-sm btn-outline-primary m-1" (click)="editarEjercicio(ejercicio)">

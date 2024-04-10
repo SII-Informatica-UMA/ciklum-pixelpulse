@@ -27,6 +27,13 @@ export class FormularioEjercicioComponent {
   }
 
   guardarEjercicio(): void {
+    if(typeof this.ejercicio.multimedia == "string"){
+      // @ts-ignore 
+    if(this.ejercicio.multimedia != ""){
+      // @ts-ignore 
+      this.ejercicio.multimedia = this.ejercicio.multimedia.split(',')
+    }
+  }
     // Cerrar el modal y pasar el objeto de ejercicio modificado
     this.modal.close(this.ejercicio);
   }
