@@ -1,3 +1,27 @@
-<h4>Página principal</h4>
-<a [routerLink]="'/usuarios'">Gestión de usuarios (solo administradores)</a>
-<a [routerLink]="'menu-principal'">Ejercicios y rutinas</a>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="cuerpo">
+    <div class="container">
+        <h4>Página principal</h4>
+
+        <div class="d-inline-flex gap-2 mb-5">
+            <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="button"
+                [routerLink]="'/usuarios'">
+                Gestión de usuarios (solo administradores)
+                <svg class="bi ms-2" width="24" height="24"></svg>
+            </button>
+            <button class="btn btn-outline-secondary btn-lg px-4 rounded-pill" type="button"
+                [routerLink]="'/menu-principal'">
+                Ejercicios y rutinas
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>
