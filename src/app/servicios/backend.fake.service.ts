@@ -152,6 +152,7 @@ private guardarEjerciciosEnLocalStorage() {
     }
   }
   postRutina(rutina: Rutina,usuarioId: string): Observable<Rutina> {
+    rutina.id = this.rutinas.length + 1;
     this.rutinas.push(rutina); // Agregamos la nueva rutina al arreglo
     this.guardarRutinasEnLocalStorage();
     return of(rutina);
