@@ -10,7 +10,7 @@ import { UsuariosService } from "../services/usuarios.service";
 })
 export class RutinaService {
 
-  constructor(private backend: BackendFakeService,private usuarioService : UsuariosService) {}
+  constructor(private backend: BackendService,private usuarioService : UsuariosService) {}
 
  añadirRutina(rutina: Rutina): Observable<Rutina> {
   let entrenadorId = this.usuarioService.getUsuarioActualId();

@@ -11,7 +11,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class EjercicioService {
 
-  constructor(private backend: BackendFakeService, private usuarioService: UsuariosService) {}
+  constructor(private backend: BackendService, private usuarioService: UsuariosService) {}
 
   getEjercicios(): Observable<Ejercicio[]> {
     let entrenadorId = this.usuarioService.getUsuarioActualId();
