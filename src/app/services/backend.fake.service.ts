@@ -69,7 +69,8 @@ export class BackendFakeService {
       });
     }
     // Si no trae contraseña generamos una aleatoria
-    if (usuario.password.length == 0) {
+    if (usuario.password
+      .length == 0) {
       usuario.password = this.generarCadena();
     }
 

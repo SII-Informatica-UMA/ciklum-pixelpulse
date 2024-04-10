@@ -10,7 +10,7 @@ import { UsuariosService } from "../services/usuarios.service";
 })
 export class RutinaService {
 
-  constructor(private backend: BackendService,private usuarioService : UsuariosService) {}
+  constructor(private backend: BackendFakeService,private usuarioService : UsuariosService) {}
 
  añadirRutina(rutina: Rutina): Observable<Rutina> {
   let entrenadorId = this.usuarioService.getUsuarioActualId();
@@ -20,12 +20,12 @@ export class RutinaService {
   return this.backend.postRutina(rutina, entrenadorId.toString());
 }
 
-getRutina(nombre: string): Observable<Rutina> {
+getRutina(id: number): Observable<Rutina> {
   let entrenadorId = this.usuarioService.getUsuarioActualId();
   if (entrenadorId === null) {
     throw new Error('No se pudo obtener el ID del usuario');
   }
-  return this.backend.getRutina(nombre, entrenadorId.toString());
+  return this.backend.getRutina(id, entrenadorId.toString());
 }
 
 editarRutina(rutina: Rutina): Observable<Rutina> {
@@ -33,15 +33,15 @@ editarRutina(rutina: Rutina): Observable<Rutina> {
   if (entrenadorId === null) {
     throw new Error('No se pudo obtener el ID del usuario');
   }
-  return this.backend.putRutina(rutina.nombre, rutina, entrenadorId.toString());
+  return this.backend.putRutina(rutina.id, rutina, entrenadorId.toString());
 }
 
-eliminarRutina(nombre: string): Observable<void> {
+eliminarRutina(id: number): Observable<void> {
   let entrenadorId = this.usuarioService.getUsuarioActualId();
   if (entrenadorId === null) {
     throw new Error('No se pudo obtener el ID del usuario');
   }
-  return this.backend.deleteRutina(nombre, entrenadorId.toString());
+  return this.backend.deleteRutina(id, entrenadorId.toString());
 }
 
 getRutinas(): Observable<Rutina[]> { 

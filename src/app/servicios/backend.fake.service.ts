@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { Rutina } from "../entities/rutina";
 import { Ejercicio } from "../entities/ejercicio";
 import { from } from "rxjs";
@@ -33,6 +33,7 @@ const ejercicioC: Ejercicio [] = [{
 
 const RutinasC: Rutina[] = [
     {
+        id: 1,
         nombre: "Rutina 1",
         descripcion: "Descripción de la Rutina 1",
         observaciones: "Observaciones sobre la Rutina 1",
@@ -52,6 +53,7 @@ const RutinasC: Rutina[] = [
         ]
     },
     {
+        id: 2,
         nombre: "Rutina 2",
         descripcion: "Descripción de la Rutina 2",
         observaciones: "Observaciones sobre la Rutina 2",
@@ -93,47 +95,63 @@ export class BackendFakeService {
     }
   }
 
-  getEjercicios(): Observable<Ejercicio[]> {
-    return of(this.ejercicios);
-  }
+ postEjercicio(ejercicio: Ejercicio,usuarioId: string): Observable<Ejercicio> {
+  ejercicio.id = this.ejercicios.length + 1;
+  this.ejercicios.push(ejercicio);
+  this.guardarEjerciciosEnLocalStorage();
+  return of(ejercicio);
+}
 
-  postEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
-    ejercicio.id = this.ejercicios.length + 1;
-    this.ejercicios.push(ejercicio);
+getEjercicios(usuarioId: string): Observable<Ejercicio[]> {
+  return of(this.ejercicios);
+}
+
+putEjercicio(id: number,ejercicio: Ejercicio,usuarioId: string): Observable<Ejercicio> {
+  const index = this.ejercicios.findIndex(e => e.id === ejercicio.id);
+  if (index !== -1) {
+    this.ejercicios[index] = ejercicio;
     this.guardarEjerciciosEnLocalStorage();
     return of(ejercicio);
+  } else {
+    return throwError(new Error('Ejercicio no encontrado'));
   }
+}
 
-  
-  private guardarEjerciciosEnLocalStorage() {
-    localStorage.setItem('ejercicios', JSON.stringify(this.ejercicios));
+deleteEjercicio(id: number,usuarioId: string): Observable<void> {
+  const index = this.ejercicios.findIndex(e => e.id === id);
+  if (index !== -1) {
+    this.ejercicios.splice(index, 1);
+    this.guardarEjerciciosEnLocalStorage();
+    return of(undefined);
+  } else {
+    return throwError(new Error('Ejercicio no encontrado'));
   }
-  putEjercicio(ejercicio: Ejercicio): Observable<Ejercicio> {
-    const index = this.ejercicios.findIndex(e => e.id === ejercicio.id);
-    if (index !== -1) {
-      this.ejercicios[index] = ejercicio;
-      this.guardarEjerciciosEnLocalStorage();
-      return of(ejercicio);
-    }
-    return new Observable(observer => observer.error('No se encontró el ejercicio'));
+}
+getEjercicio(id: number,usuarioId: string): Observable<Ejercicio> {
+  const ejercicio = this.ejercicios.find(e => e.id === id);
+  if (ejercicio) {
+    return of(ejercicio);
+  } else {
+    return throwError(new Error('Ejercicio no encontrado'));
   }
+}
 
-  deleteEjercicio(id: number): Observable<void> {
-    const index = this.ejercicios.findIndex(e => e.id === id);
-    if (index !== -1) {
-      this.ejercicios.splice(index, 1);
-      this.guardarEjerciciosEnLocalStorage();
+private guardarEjerciciosEnLocalStorage() {
+  localStorage.setItem('ejercicios', JSON.stringify(this.ejercicios));
+}
 
-      return of();
-    }
-    return new Observable(observer => observer.error('No se encontró el ejercicio'));
-  }
-
-  getRutinas(): Observable<Rutina[]> {
+  getRutinas(usuarioId: string): Observable<Rutina[]> {
     return of(this.rutinas);
   }
-  
-  postRutina(rutina: Rutina): Observable<Rutina> {
+  getRutina(id: number,usuarioId: string): Observable<Rutina> {
+    const rutina = this.rutinas.find(r => r.id === id);
+    if (rutina) {
+      return of(rutina);
+    } else {
+      return throwError(new Error('Ejercicio no encontrado'));
+    }
+  }
+  postRutina(rutina: Rutina,usuarioId: string): Observable<Rutina> {
     this.rutinas.push(rutina); // Agregamos la nueva rutina al arreglo
     this.guardarRutinasEnLocalStorage();
     return of(rutina);
@@ -141,8 +159,8 @@ export class BackendFakeService {
   private guardarRutinasEnLocalStorage() {
     localStorage.setItem('rutinas', JSON.stringify(this.rutinas));
   }
-  putRutina(rutina: Rutina): Observable<Rutina> {
-    const index = this.rutinas.findIndex(r => r.nombre === rutina.nombre); // Buscamos la rutina por su nombre
+  putRutina(id:number,rutina: Rutina,usuarioId: string): Observable<Rutina> {
+    const index = this.rutinas.findIndex(r => r.id === rutina.id); // Buscamos la rutina por su id
     if (index !== -1) {
       this.rutinas[index] = rutina; // Actualizamos la rutina existente
       this.guardarRutinasEnLocalStorage();
@@ -151,8 +169,8 @@ export class BackendFakeService {
     return new Observable(observer => observer.error('No se encontró la rutina'));
   }
   
-  deleteRutina(nombre: string): Observable<void> {
-    const index = this.rutinas.findIndex(r => r.nombre === nombre); // Buscamos la rutina por su nombre
+  deleteRutina(id: number,usuarioId: string): Observable<void> {
+    const index = this.rutinas.findIndex(r => r.id === id); // Buscamos la rutina por su id
     if (index !== -1) {
       this.rutinas.splice(index, 1); // Eliminamos la rutina del arreglo
       this.guardarRutinasEnLocalStorage();

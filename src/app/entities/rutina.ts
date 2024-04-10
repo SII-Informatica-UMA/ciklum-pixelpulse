@@ -1,6 +1,7 @@
 import { Ejercicio } from './ejercicio';
 
 export interface Rutina {
+  id: number;
   nombre: string;
   descripcion: string;
   observaciones: string;
@@ -13,6 +14,7 @@ export interface Rutina {
 }
 
 export class RutinaImpl implements Rutina{
+    id: number;
     nombre: string;
     descripcion: string;
     observaciones: string;
@@ -24,6 +26,7 @@ export class RutinaImpl implements Rutina{
   }[];
   
   constructor(){
+    this.id=0;
     this.nombre='';
     this.descripcion='';
     this.observaciones='';

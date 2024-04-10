@@ -47,8 +47,8 @@ anadirRutina(): void {
     });
   }
 
-  eliminarRutina(nombre: string): void {
-    this.rutinasService.eliminarRutina(nombre).subscribe(() => {
+  eliminarRutina(id: number): void {
+    this.rutinasService.eliminarRutina(id).subscribe(() => {
       this.actualizarRutinas();
     });
   }

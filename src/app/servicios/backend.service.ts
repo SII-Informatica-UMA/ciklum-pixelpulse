@@ -24,16 +24,16 @@ export class BackendService {
   return this.httpClient.post<Rutina>(`${BACKEND_URI}/rutina?entrenador=${entrenadorId}`, rutina);
 }
 
-getRutina(nombre: string, entrenadorId: string): Observable<Rutina> {
-  return this.httpClient.get<Rutina>(`${BACKEND_URI}/rutina/${nombre}?entrenador=${entrenadorId}`);
+getRutina(id: number, entrenadorId: string): Observable<Rutina> {
+  return this.httpClient.get<Rutina>(`${BACKEND_URI}/rutina/${id}?entrenador=${entrenadorId}`);
 }
 
-putRutina(nombre: string, rutina: Rutina, entrenadorId: string): Observable<Rutina> {
-  return this.httpClient.put<Rutina>(`${BACKEND_URI}/rutina/${nombre}?entrenador=${entrenadorId}`, rutina);
+putRutina(id: number, rutina: Rutina, entrenadorId: string): Observable<Rutina> {
+  return this.httpClient.put<Rutina>(`${BACKEND_URI}/rutina/${id}?entrenador=${entrenadorId}`, rutina);
 }
 
-deleteRutina(nombre: string, entrenadorId: string): Observable<void> {
-  return this.httpClient.delete<void>(`${BACKEND_URI}/rutina/${nombre}?entrenador=${entrenadorId}`);
+deleteRutina(id: number, entrenadorId: string): Observable<void> {
+  return this.httpClient.delete<void>(`${BACKEND_URI}/rutina/${id}?entrenador=${entrenadorId}`);
 }
 
  
