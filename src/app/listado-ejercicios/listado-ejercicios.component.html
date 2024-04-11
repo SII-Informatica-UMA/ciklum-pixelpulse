@@ -50,7 +50,9 @@
                               <td>{{ ejercicio.musculosTrabajados }}</td>
                               <td>{{ ejercicio.material }}</td>
                               <td>{{ ejercicio.dificultad }}</td>
-                              <td>{{ ejercicio.multimedia[0] }}</td>
+                              <td>
+                                <div *ngFor="let multimedia of ejercicio.multimedia">{{ multimedia }}</div>
+                              </td>
                               <td>
                                   <button class="btn btn-sm btn-outline-primary m-1" (click)="editarEjercicio(ejercicio)">
                                       <i class="bi bi-pencil-fill"></i> Editar
