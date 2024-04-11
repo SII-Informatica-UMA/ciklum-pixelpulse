@@ -40,6 +40,7 @@ h1{
   text-align: right; 
   position: relative;
   left: 1200px;
+  
 }
 
 .container {
@@ -48,7 +49,6 @@ h1{
   background-color: rgb(217, 217, 217);
   border-radius: 14px;
   color: #000;
-  overflow-y: auto;
   border:2px solid black;
   background: linear-gradient(to bottom, rgba(53,58,64,255) 15%, rgb(217, 217, 217) 15%);
 }

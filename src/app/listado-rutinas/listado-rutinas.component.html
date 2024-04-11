@@ -16,10 +16,11 @@
   </div>
   <body>
   <div class = "fondo">
-  <div class="container">
-    <h1 class="text-center" >Listado de Rutinas</h1>
-    <div class="rutinas-list">
-      <table class="table table-striped">
+    <div class="container">
+      <div class="row">
+              <h1 class="text-center" >Listado de Rutinas</h1>
+              <div class="table-responsive" style="max-height:  40vh; padding-top: 2.5%;overflow-y: auto;">
+                  <table class="table table-striped">
         <thead>
           <tr>
             <th>Id</th>
@@ -45,7 +46,7 @@
             </td>
             <td>
               <!-- Botón de editar -->
-              <button type="button" class="btn btn-primary" (click)="editarRutina(rutina)">Editar</button>
+              <button type="button" class="btn btn-primary" style="margin-right: 5px" (click)="editarRutina(rutina)">Editar</button>
               <!-- Botón de eliminar -->
               <button type="button" class="btn btn-danger" (click)="eliminarRutina(rutina.id)">Eliminar</button>
             </td>
@@ -53,10 +54,13 @@
         </tbody>
       </table>
     </div>
-    <div class="acciones">
-        <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="anadirRutina()">Añadir rutina</button>
+     <div class="acciones">
+    <button type="button" class="btn btn-outline-success bi bi-plus-lg" (click)="anadirRutina()">Añadir rutina</button>
     </div>
-  </div>
+     </div>
+ 
+        </div>
 </div>
+
 </body>
 </html>
