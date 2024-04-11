@@ -97,7 +97,21 @@ h1{
   position: relative;
   
 }
+.table-responsive th,
+.table-responsive td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: center;
+}
 
+.table-responsive th {
+  background-color: rgba(53, 58, 64, 255);
+  color: white;
+}
+
+.table-responsive tr:nth-child(even) {
+  background-color: #f0f0f0;
+}
 /* Estilos para las pestañas de navegación */
 .nav-tabs {
   position: relative;
