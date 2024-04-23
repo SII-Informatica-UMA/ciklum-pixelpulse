@@ -11,6 +11,7 @@ import pixelpulse.entidades.Ejercicio;
 
 public interface RepoEjercicios extends JpaRepository<Ejercicio, Long> {
     List<Ejercicio> findByIdEntrenador(Long idEntrenador);
+    List<Ejercicio> findByIDAndNombreOrderByNombreAsc(String idEntrenador, String nombre);
     @Query("SELECT e FROM Ejercicio e WHERE e.tipo = :tipo AND e.dificultad = :dificultad")
     List<Ejercicio> buscarPorTipoYDificultad(String tipo, String dificultad);
 }

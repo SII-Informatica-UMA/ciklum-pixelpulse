@@ -10,7 +10,7 @@ import pixelpulse.entidades.Rutina;
 
 public interface RepoRutinas extends JpaRepository<Rutina, Long> {
     List<Rutina> findByIdEntrenador(Long idEntrenador);
-
+    List<Rutina> findByIDAndNombreOrderByNombreAsc(String idEntrenador, String nombre);
     @Query("SELECT CASE WHEN COUNT(r) > 0 THEN TRUE ELSE FALSE END FROM Rutina r WHERE EXISTS (SELECT 1 FROM r.ejercicios f WHERE f.ejercicio.id = :idEjercicio)")
     boolean existsRutinaWithEjercicio(@Param("idEjercicio") Long idEjercicio);
 }
