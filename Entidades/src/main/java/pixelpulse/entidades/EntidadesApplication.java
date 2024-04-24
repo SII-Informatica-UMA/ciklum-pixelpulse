@@ -1,5 +1,7 @@
 package pixelpulse.entidades;
 
+import java.util.ArrayList;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,8 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import ch.qos.logback.classic.Logger;
 
+
 @SpringBootApplication
 public class EntidadesApplication implements CommandLineRunner{
+
+
 	
 	private static Logger LOG = (Logger) LoggerFactory.getLogger(EntidadesApplication.class);
 
@@ -25,6 +30,10 @@ public class EntidadesApplication implements CommandLineRunner{
         for (int i = 0; i < args.length; ++i) {
             LOG.info("args[{}]: {}", i, args[i]);
         }
-    }
+		
 
+	}
+	
+
+	
 }
