@@ -1,0 +1,12 @@
+create sequence ejerciciodto_seq start with 1 increment by 50;
+create sequence fragmento_rutinadto_seq start with 1 increment by 50;
+create sequence rutinadto_seq start with 1 increment by 50;
+create table ejerciciodto (id integer not null, id_entrenador bigint, descripcion varchar(255), dificultad varchar(255), material varchar(255), musculos_trabajados varchar(255), nombre varchar(255), observaciones varchar(255), tipo varchar(255), primary key (id));
+create table ejerciciodto_multimedia (ejerciciodto_id integer not null, multimedia varchar(255));
+create table fragmento_rutinadto (duracion_minutos integer, ejercicio_id integer, repeticiones integer, series integer, id bigint not null, primary key (id));
+create table rutinadto (id bigint not null, id_entrenador bigint, descripcion varchar(255), nombre varchar(255), observaciones varchar(255), primary key (id));
+create table rutinadto_ejercicios (ejercicios_id bigint not null unique, rutinadto_id bigint not null);
+alter table if exists ejerciciodto_multimedia add constraint FKkkpd9g0wa6vkqv2to177nackc foreign key (ejerciciodto_id) references ejerciciodto;
+alter table if exists fragmento_rutinadto add constraint FKujqxcv6766ociu9l0g8qufe8 foreign key (ejercicio_id) references ejerciciodto;
+alter table if exists rutinadto_ejercicios add constraint FKbu23v37tixfvrag4da2vl1bi7 foreign key (ejercicios_id) references fragmento_rutinadto;
+alter table if exists rutinadto_ejercicios add constraint FK21dhdp76d5h4p7vurwp81r7ts foreign key (rutinadto_id) references rutinadto;
