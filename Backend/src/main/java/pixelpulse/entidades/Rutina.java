@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class RutinaDTO {
+public class Rutina {
     @Id
     @GeneratedValue Long id;
     private String nombre;
@@ -20,7 +20,7 @@ public class RutinaDTO {
         orphanRemoval = true,
         cascade = {CascadeType.ALL}
     )
-    private List<FragmentoRutinaDTO> ejercicios;
+    private List<FragmentoRutina> ejercicios;
     private Long idEntrenador;
 
     
@@ -41,7 +41,7 @@ public class RutinaDTO {
         return this.observaciones;
     }
 
-    public List<FragmentoRutinaDTO> getEjercicios() {
+    public List<FragmentoRutina> getEjercicios() {
         return this.ejercicios;
     }
 
@@ -65,7 +65,7 @@ public class RutinaDTO {
         this.observaciones = observaciones;
     }
 
-    public void setEjercicios(final List<FragmentoRutinaDTO> ejercicios) {
+    public void setEjercicios(final List<FragmentoRutina> ejercicios) {
         this.ejercicios = ejercicios;
     }
 
@@ -73,7 +73,7 @@ public class RutinaDTO {
         this.idEntrenador = idEntrenador;
     }
 
-    public RutinaDTO(final Long id, final String nombre, final String descripcion, final String observaciones, final List<FragmentoRutinaDTO> ejercicios, final Long idEntrenador) {
+    public Rutina(final Long id, final String nombre, final String descripcion, final String observaciones, final List<FragmentoRutina> ejercicios, final Long idEntrenador) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -82,17 +82,17 @@ public class RutinaDTO {
         this.idEntrenador = idEntrenador;
     }
 
-    public RutinaDTO() {
+    public Rutina() {
     }
 
     public boolean equals( Object o) {
         if (o == this)  return true;
             
-        if (!(o instanceof EjercicioDTO))  return false; 
+        if (!(o instanceof Ejercicio))  return false; 
                
             
         if(getClass() != o.getClass()) return false;
-            RutinaDTO ot = (RutinaDTO) o;
+            Rutina ot = (Rutina) o;
             return Objects.equals(this.id, ot.id);
         
     }

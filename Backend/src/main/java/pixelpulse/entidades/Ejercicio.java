@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class EjercicioDTO {
+public class Ejercicio {
     @Id
     @GeneratedValue
     private Integer id;
@@ -105,7 +105,7 @@ public class EjercicioDTO {
         this.idEntrenador = idEntrenador;
     }
 
-    public EjercicioDTO(final Integer id, final String nombre, final String descripcion, final String observaciones, final String tipo, final String musculosTrabajados, final String material, final String dificultad, final List<String> multimedia, final Long idEntrenador) {
+    public Ejercicio(final Integer id, final String nombre, final String descripcion, final String observaciones, final String tipo, final String musculosTrabajados, final String material, final String dificultad, final List<String> multimedia, final Long idEntrenador) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -118,18 +118,18 @@ public class EjercicioDTO {
         this.idEntrenador = idEntrenador;
     }
 
-    public EjercicioDTO() {
+    public Ejercicio() {
     }
 
     
     public boolean equals( Object o) {
         if (o == this)  return true;
             
-        if (!(o instanceof EjercicioDTO))  return false; 
+        if (!(o instanceof Ejercicio))  return false; 
                
             
         if(getClass() != o.getClass()) return false;
-            EjercicioDTO ot = (EjercicioDTO) o;
+            Ejercicio ot = (Ejercicio) o;
             return Objects.equals(this.id, ot.id);
         
     }

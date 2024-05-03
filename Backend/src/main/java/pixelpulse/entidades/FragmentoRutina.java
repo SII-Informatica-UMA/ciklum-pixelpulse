@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class FragmentoRutinaDTO {
+public class FragmentoRutina {
     @Id
     @GeneratedValue
     private Long id;
@@ -15,7 +15,7 @@ public class FragmentoRutinaDTO {
     private Integer repeticiones;
     private Integer duracionMinutos;
     @ManyToOne
-    private EjercicioDTO ejercicio;
+    private Ejercicio ejercicio;
 
     
 
@@ -35,7 +35,7 @@ public class FragmentoRutinaDTO {
         return this.duracionMinutos;
     }
 
-    public EjercicioDTO getEjercicio() {
+    public Ejercicio getEjercicio() {
         return this.ejercicio;
     }
 
@@ -55,11 +55,11 @@ public class FragmentoRutinaDTO {
         this.duracionMinutos = duracionMinutos;
     }
 
-    public void setEjercicio(final EjercicioDTO ejercicio) {
+    public void setEjercicio(final Ejercicio ejercicio) {
         this.ejercicio = ejercicio;
     }
 
-    public FragmentoRutinaDTO(final Long id, final Integer series, final Integer repeticiones, final Integer duracionMinutos, final EjercicioDTO ejercicio) {
+    public FragmentoRutina(final Long id, final Integer series, final Integer repeticiones, final Integer duracionMinutos, final Ejercicio ejercicio) {
         this.id = id;
         this.series = series;
         this.repeticiones = repeticiones;
@@ -67,17 +67,17 @@ public class FragmentoRutinaDTO {
         this.ejercicio = ejercicio;
     }
 
-    public FragmentoRutinaDTO() {
+    public FragmentoRutina() {
     }
 
     public boolean equals( Object o) {
         if (o == this)  return true;
             
-        if (!(o instanceof EjercicioDTO))  return false; 
+        if (!(o instanceof Ejercicio))  return false; 
                
             
         if(getClass() != o.getClass()) return false;
-            FragmentoRutinaDTO ot = (FragmentoRutinaDTO) o;
+            FragmentoRutina ot = (FragmentoRutina) o;
             return Objects.equals(this.id, ot.id);
         
     }
