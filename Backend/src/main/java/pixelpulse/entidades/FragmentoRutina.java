@@ -17,7 +17,10 @@ public class FragmentoRutina {
     @ManyToOne
     private Ejercicio ejercicio;
 
-    
+    public static FragmentoRutinaBuilder builder() {
+        return new FragmentoRutinaBuilder();
+    }
+
 
     public Long getId() {
         return this.id;
@@ -70,29 +73,66 @@ public class FragmentoRutina {
     public FragmentoRutina() {
     }
 
-    public boolean equals( Object o) {
-        if (o == this)  return true;
-            
-        if (!(o instanceof Ejercicio))  return false; 
-               
-            
-        if(getClass() != o.getClass()) return false;
-            FragmentoRutina ot = (FragmentoRutina) o;
-            return Objects.equals(this.id, ot.id);
-        
+    public boolean equals(Object o) {
+        if (o == this) return true;
+
+        if (!(o instanceof Ejercicio)) return false;
+
+
+        if (getClass() != o.getClass()) return false;
+        FragmentoRutina ot = (FragmentoRutina) o;
+        return Objects.equals(this.id, ot.id);
+
     }
-    
-   
+
 
     public int hashCode() {
         return Objects.hashCode(id);
     }
 
-    
+    public static class FragmentoRutinaBuilder {
+        private Long id;
+        private Integer series;
+        private Integer repeticiones;
+        private Integer duracionMinutos;
+        private Ejercicio ejercicio;
+
+        FragmentoRutinaBuilder() {
+        }
+
+        public FragmentoRutinaBuilder id(final Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public FragmentoRutinaBuilder series(final Integer series) {
+            this.series = series;
+            return this;
+        }
+
+        public FragmentoRutinaBuilder repeticiones(final Integer repeticiones) {
+            this.repeticiones = repeticiones;
+            return this;
+        }
+
+        public FragmentoRutinaBuilder duracionMinutos(final Integer duracionMinutos) {
+            this.duracionMinutos = duracionMinutos;
+            return this;
+        }
+
+        public FragmentoRutinaBuilder ejercicio(final Ejercicio ejercicio) {
+            this.ejercicio = ejercicio;
+            return this;
+        }
+
+        public FragmentoRutina build() {
+            return new FragmentoRutina(this.id, this.series, this.repeticiones, this.duracionMinutos, this.ejercicio);
+        }
 
         public String toString() {
             Long var10000 = this.id;
             return "FragmentoRutina.FragmentoRutinaBuilder(id=" + var10000 + ", series=" + this.series + ", repeticiones=" + this.repeticiones + ", duracionMinutos=" + this.duracionMinutos + ", ejercicio=" + String.valueOf(this.ejercicio) + ")";
         }
-    
+
+    }
 }
