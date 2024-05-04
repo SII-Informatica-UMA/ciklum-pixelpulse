@@ -1,4 +1,4 @@
-package Services;
+package services;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,18 +12,22 @@ import repositorio.EjerciciosRepo;
 
 @Service
 @Transactional
-public class EjerciciosService {
+public class EjercicioService {
     private EjerciciosRepo ejerciciosRepo;
     
     @Autowired
-    public EjerciciosService(EjerciciosRepo er){
+    public EjercicioService(EjerciciosRepo er){
         this.ejerciciosRepo=er;
     }
 
     public Optional<Ejercicio> getEjercicio(Long id){
         return ejerciciosRepo.findById(id);
     }
-    public List<Ejercicio> getEjercicios(String musculo,String dificult) throws Exception{
+
+    public List<Ejercicio> obtenerEjercicios(Long idEntrenador) {
+        return this.ejerciciosRepo.findByIdEntrenador(idEntrenador);
+    }
+    public List<Ejercicio> getEjerciciosPorMusculo(String musculo,String dificult) throws Exception{
         List<Ejercicio> li= ejerciciosRepo.buscarPorMusculoYDificultad(musculo, dificult);
         if(li.isEmpty()){
             throw new Exception();

@@ -1,4 +1,4 @@
-package Services;
+package services;
 
 import CustomExceptions.RutinaNotFoundException;
 import org.springframework.stereotype.Service;

@@ -23,7 +23,10 @@ public class Rutina {
     private List<FragmentoRutina> ejercicios;
     private Long idEntrenador;
 
-    
+    public static RutinaBuilder builder() {
+        return new RutinaBuilder();
+    }
+
 
     public Long getId() {
         return this.id;
@@ -103,13 +106,56 @@ public class Rutina {
 
         return Objects.hashCode(id);
     }
-        
 
-    
+
+    public static class RutinaBuilder {
+        private Long id;
+        private String nombre;
+        private String descripcion;
+        private String observaciones;
+        private List<FragmentoRutina> ejercicios;
+        private Long idEntrenador;
+
+        RutinaBuilder() {
+        }
+
+        public RutinaBuilder id(final Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public RutinaBuilder nombre(final String nombre) {
+            this.nombre = nombre;
+            return this;
+        }
+
+        public RutinaBuilder descripcion(final String descripcion) {
+            this.descripcion = descripcion;
+            return this;
+        }
+
+        public RutinaBuilder observaciones(final String observaciones) {
+            this.observaciones = observaciones;
+            return this;
+        }
+
+        public RutinaBuilder ejercicios(final List<FragmentoRutina> ejercicios) {
+            this.ejercicios = ejercicios;
+            return this;
+        }
+
+        public RutinaBuilder idEntrenador(final Long idEntrenador) {
+            this.idEntrenador = idEntrenador;
+            return this;
+        }
+
+        public Rutina build() {
+            return new Rutina(this.id, this.nombre, this.descripcion, this.observaciones, this.ejercicios, this.idEntrenador);
+        }
 
         public String toString() {
             Long var10000 = this.id;
             return "Rutina.RutinaBuilder(id=" + var10000 + ", nombre=" + this.nombre + ", descripcion=" + this.descripcion + ", observaciones=" + this.observaciones + ", ejercicios=" + String.valueOf(this.ejercicios) + ", idEntrenador=" + this.idEntrenador + ")";
         }
     }
-
+}
