@@ -1,5 +1,5 @@
 package Dtos;
-import pixelpulse.entidades.Rutina;
+import entidades.Rutina;
 import java.util.List;
 
 public class RutinaDTO extends RutinaNuevaDTO {

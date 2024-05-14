@@ -2,7 +2,7 @@ package services;
 
 import CustomExceptions.RutinaNotFoundException;
 import org.springframework.stereotype.Service;
-import pixelpulse.entidades.Rutina;
+import entidades.Rutina;
 import repositorio.RutinaRepo;
 
 import java.util.List;

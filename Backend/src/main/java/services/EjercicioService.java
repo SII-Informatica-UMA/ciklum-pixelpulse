@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import pixelpulse.entidades.Ejercicio;
+import entidades.Ejercicio;
 import repositorio.EjerciciosRepo;
 
 @Service

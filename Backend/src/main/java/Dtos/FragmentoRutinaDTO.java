@@ -1,5 +1,5 @@
 package Dtos;
-import pixelpulse.entidades.FragmentoRutina;
+import entidades.FragmentoRutina;
 import java.util.List;
 
 public class FragmentoRutinaDTO {

@@ -1,4 +1,4 @@
-package pixelpulse.entidades;
+package entidades;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;

@@ -1,5 +1,5 @@
 package Dtos;
-import pixelpulse.entidades.Ejercicio;
+import entidades.Ejercicio;
 import java.util.List;
 
 public class EjercicioNuevoDTO {
