@@ -1,5 +1,7 @@
 HELP.md
 target/
+database.mv.db
+esquema.ddl
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
