@@ -11,9 +11,11 @@ import EntidadesApplication.Dtos.EjercicioNuevoDTO;
 import EntidadesApplication.entities.Ejercicio;
 import EntidadesApplication.services.EjercicioService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,10 +37,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @CrossOrigin
 @RequestMapping({"/ejercicios"})
-/*@Tag(
+@Tag(
         name = "Gestión de ejercicios y rutinas",
         description = "Conjunto de operaciones para la gestión de ejercicios y rutinas"
-)*/
+)
 public class GestionEjercicios {
     private EjercicioService ejercicioService;
 
@@ -67,7 +69,8 @@ public class GestionEjercicios {
     }
 
     @PostMapping
-    /*@Operation(
+    //@PreAuthorize("hasRole('ENTRENADOR')")  // Solo los entrenadores pueden crear ejercicios (No se si habría que poner esto)
+    @Operation(
             description = "Permite crear un ejercicio nuevo a un entrenador. ",
             responses = {@ApiResponse(
                     responseCode = "201",
@@ -89,7 +92,7 @@ public class GestionEjercicios {
                             )
                     )}
             )}
-    )*/
+    )
      public ResponseEntity<EjercicioDTO> crearEjercicio(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) throws Exception {
         Ejercicio g = ejercicioNuevoDTO.toEntity();
         g.setId((Long)null);
