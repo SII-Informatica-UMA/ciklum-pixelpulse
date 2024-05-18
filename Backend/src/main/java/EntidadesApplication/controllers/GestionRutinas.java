@@ -109,7 +109,7 @@ public class GestionRutinas {
     }
 
     @GetMapping({"/{idRutina}"})
-   /* @Operation(
+    @Operation(
             description = "Obtiene una rutina concreta. Solo puede hacerlo el entrenador que la ha creado y los clientes que entrena.",
             responses = {@ApiResponse(
                     responseCode = "200",
@@ -131,13 +131,13 @@ public class GestionRutinas {
                             )
                     )}
             )}
-    )*/
+    )
     public ResponseEntity<RutinaDTO> getRutina(@PathVariable Long idRutina) {
         return ResponseEntity.of(this.rutinaService.GetRutina(idRutina).map(RutinaDTO::fromEntity));
     }
 
     @PutMapping({"/{idRutina}"})
-   /* @Operation(
+    @Operation(
             description = "Actualiza una rutina. Solo puede hacerlo el entrenador que lo ha creado.",
             responses = {@ApiResponse(
                     responseCode = "200",
@@ -159,7 +159,7 @@ public class GestionRutinas {
                             )
                     )}
             )}
-    )*/
+    )
     public RutinaDTO actualizarRutina(@PathVariable Long idRutina, @RequestBody RutinaDTO rutina) {
         Rutina r = rutina.toEntity();
         r.setId(idRutina);
@@ -168,7 +168,7 @@ public class GestionRutinas {
     }
 
     @DeleteMapping({"/{idRutina}"})
-    /*@Operation(
+    @Operation(
             description = "Elimina la rutina. Solo puede hacerlo el entrenador que la ha creado.",
             responses = {@ApiResponse(
                     responseCode = "200",
@@ -190,7 +190,7 @@ public class GestionRutinas {
                             )
                     )}
             )}
-    )*/
+    )
     public void eliminarRutina(@PathVariable Long idRutina) {
         this.rutinaService.DeleteRutina(idRutina);
     }
