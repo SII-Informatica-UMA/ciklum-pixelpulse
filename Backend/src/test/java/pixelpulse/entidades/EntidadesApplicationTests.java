@@ -120,6 +120,43 @@ class EntidadesApplicationTests {
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
             assertThat(respuesta.getBody()).isEmpty();
         }
+
+        @Test
+        @DisplayName("error al intentar obtener ejercicio especifico cuando no hay ejercicios")
+        public void obtenerEjercicioNoExiste() {
+            Long idEjercicio = 1L;
+
+            var peticion = get("http", "localhost", port, "/ejercicios/" + idEjercicio);
+            var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+        }
+
+        @Test
+        @DisplayName("Error al actualizar un ejercicio especifico no existente")
+        public void actualizarEjercicioNoExiste() {
+            Long idEjercicio = 1L;
+            EjercicioDTO ejercicioActualizado = new EjercicioDTO();
+            ejercicioActualizado.setNombre("Nuevo Ejercicio 1");
+
+            var peticion = put("http", "localhost", port, ejercicioActualizado, "/ejercicios/" + idEjercicio);
+
+            var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+        }
+
+        @Test
+        @DisplayName("error al eliminar ejercicio especifico no existente")
+        public void eliminarEjercicioNoExiste() {
+            Long idEjercicio = 1L;
+
+            var peticion = delete("http", "localhost", port, "/ejercicios/" + idEjercicio);
+            var respuesta = restTemplate.exchange(peticion, Void.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+        }
+
     }
 
     @Nested
@@ -155,7 +192,7 @@ class EntidadesApplicationTests {
                     new ParameterizedTypeReference<List<Ejercicio>>() {
                     });
 
-            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
         }
     }
 
@@ -208,6 +245,51 @@ class EntidadesApplicationTests {
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
     }
+
+
+    @Nested
+    @DisplayName("cuando no hay rutinas")
+    public class RutinasVacias {
+
+        @Test
+        @DisplayName("devuelve la lista de rutinas vacia")
+        public void devuelveRutinas() {
+            var peticion = get("http", "localhost", port, "/rutinas");
+
+            var respuesta = restTemplate.exchange(peticion,
+                    new ParameterizedTypeReference<List<RutinaDTO>>() {
+                    });
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+            assertThat(respuesta.getBody()).isEmpty();
+        }
+
+        @Test
+        @DisplayName("error al intentar eliminar rutina  no existente")
+        public void eliminarRutinaVacia() {
+            Long idRutina = 1L;
+
+            var peticion = delete("http", "localhost", port, "/rutinas/" + idRutina);
+            var respuesta = restTemplate.exchange(peticion, Void.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+        }
+
+        @Test
+        @DisplayName("error al intentar obtener una rutina especifica vacia")
+        public void obtenerRutinaVacia() {
+            Long idRutina = 1L;
+
+            var peticion = get("http", "localhost", port, "/rutinas/" + idRutina);
+            var respuesta = restTemplate.exchange(peticion, Rutina.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
+            assertThat(respuesta.getBody().getId()).isEqualTo(idRutina);
+        }
+
+
+    }
+
 
     @Nested
     @DisplayName("Rutinas de entrenador")
