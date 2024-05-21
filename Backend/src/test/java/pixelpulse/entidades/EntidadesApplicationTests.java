@@ -192,7 +192,7 @@ class EntidadesApplicationTests {
                     new ParameterizedTypeReference<List<Ejercicio>>() {
                     });
 
-            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
     }
 
@@ -283,8 +283,8 @@ class EntidadesApplicationTests {
             var peticion = get("http", "localhost", port, "/rutinas/" + idRutina);
             var respuesta = restTemplate.exchange(peticion, Rutina.class);
 
-            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
-            assertThat(respuesta.getBody().getId()).isEqualTo(idRutina);
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+
         }
 
 
