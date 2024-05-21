@@ -287,6 +287,20 @@ class EntidadesApplicationTests {
 
         }
 
+        @Test
+        @DisplayName("error al intentar actualizar una rutina existente vacia")
+        public void actualizarRutinaVacia() {
+            Long idRutina = 1L;
+            RutinaDTO rutinaActualizada = new RutinaDTO();
+            rutinaActualizada.setNombre("Nueva Rutina 1");
+
+            var peticion = put("http", "localhost", port, rutinaActualizada, "/rutinas/" + idRutina);
+
+            var respuesta = restTemplate.exchange(peticion, Rutina.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(404);
+        }
+
 
     }
 
