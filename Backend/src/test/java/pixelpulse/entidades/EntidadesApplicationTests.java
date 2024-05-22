@@ -170,6 +170,21 @@ class EntidadesApplicationTests {
             ejercicioRepository.save(ejercicio);
         }
 
+
+        @Test
+        @DisplayName("error al tratar de insertar un ejercicio ya existente")
+        @WithMockUser(roles = "ENTRENADOR")
+        public void crearEjercicioExistente() {
+            EjercicioNuevoDTO nuevoEjercicio = new EjercicioNuevoDTO();
+            nuevoEjercicio.setNombre("Ejercicio 1");
+
+            var peticion = post("http", "localhost", port, nuevoEjercicio, "/ejercicios");
+            var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(409);
+
+        }
+
         @Test
         @DisplayName("Crea un ejercicio nuevo a un entrenador")
         @WithMockUser(roles = "ENTRENADOR")
@@ -313,6 +328,19 @@ class EntidadesApplicationTests {
             Rutina rutina = new Rutina();
             rutina.setNombre("Rutina 1");
             rutinaRepository.save(rutina);
+        }
+
+        @Test
+        @DisplayName("error al intentar insertar una rutina ya existente")
+        public void crearRutinaExistente() {
+            RutinaNuevaDTO rutina = new RutinaNuevaDTO();
+            rutina.setNombre("Rutina 1");
+
+            var peticion = post("http", "localhost", port, rutina, "/rutinas");
+            var respuesta = restTemplate.exchange(peticion, Rutina.class);
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(409);
+
         }
 
         @Test
