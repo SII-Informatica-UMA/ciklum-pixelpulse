@@ -6,7 +6,7 @@ import EntidadesApplication.EntidadesApplication;
 import EntidadesApplication.entities.Rutina;
 import EntidadesApplication.repositories.EjerciciosRepo;
 import EntidadesApplication.repositories.RutinaRepo;
-import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import EntidadesApplication.Dtos.EjercicioDTO;
@@ -26,6 +26,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriBuilderFactory;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -44,7 +45,7 @@ class EntidadesApplicationTests {
 
     @Value(value = "${local.server.port}")
     private int port;
-
+    private String jwtToken;
     @Autowired
     private EjercicioService ejercicioService;
 
@@ -58,6 +59,8 @@ class EntidadesApplicationTests {
     public void initializeDatabase() {
         ejercicioRepository.deleteAll();
         rutinaRepository.deleteAll();
+        jwtToken="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE1ODA4MjU2LCJleHAiOjYwMDAxNzE1ODA4MjU2fQ.TlGrRwC7BI0maP--cNOepyOGneYY9bTI4Zke6DTVw-T59FhS4QjjFN7NTm6GhcfxDmPbD2jcLdebzS8TXvEnbQ";
+
     }
 
     private URI uri(String scheme, String host, int port, Map<String, String> queryParams, String... paths) {
@@ -78,8 +81,15 @@ class EntidadesApplicationTests {
     }
 
     private RequestEntity<Void> get(String scheme, String host, int port, String path) {
-        URI uri = uri(scheme, host, port, null, path);
-        var peticion = RequestEntity.get(uri)
+        URI uri = UriComponentsBuilder.newInstance()
+            .scheme(scheme)
+            .host(host)
+            .port(port)
+            .path(path)
+            .queryParam("entrenador", 1)
+            .build()
+            .toUri();
+        var peticion = RequestEntity.get(uri).header("Authorization", "Bearer "+jwtToken)
                 .accept(MediaType.APPLICATION_JSON)
                 .build();
         return peticion;
@@ -87,21 +97,21 @@ class EntidadesApplicationTests {
 
     private <T> RequestEntity<T> post(String scheme, String host, int port, T body, String path) {
         URI uri = uri(scheme, host, port, null, path);
-        return RequestEntity.post(uri)
+        return RequestEntity.post(uri).header("Authorization", "Bearer "+jwtToken)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(body);
     }
 
     private <T> RequestEntity<T> put(String scheme, String host, int port, T body, String path) {
         URI uri = uri(scheme, host, port, null, path);
-        return RequestEntity.put(uri)
+        return RequestEntity.put(uri).header("Authorization", "Bearer "+jwtToken)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(body);
     }
 
     private RequestEntity<Void> delete(String scheme, String host, int port, String path) {
         URI uri = uri(scheme, host, port, null, path);
-        return RequestEntity.delete(uri).build();
+        return RequestEntity.delete(uri).header("Authorization", "Bearer "+jwtToken).build();
     }
 
     @Nested
