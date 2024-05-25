@@ -38,7 +38,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @CrossOrigin
-@RequestMapping({"/rutinas"})
+@RequestMapping({"/rutina"})
 @Tag(
         name = "Gestión de ejercicios y rutinas",
         description = "Conjunto de operaciones para la gestión de ejercicios y rutinas"
@@ -160,9 +160,10 @@ public class GestionRutinas {
                     )}
             )}
     )
-    public RutinaDTO actualizarRutina(@PathVariable Long idRutina, @RequestBody RutinaDTO rutina) {
+    public RutinaDTO actualizarRutina(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @PathVariable Long idRutina, @RequestBody RutinaDTO rutina) {
         Rutina r = rutina.toEntity();
         r.setId(idRutina);
+        r.setIdEntrenador(idEntrenador);
         r = this.rutinaService.PutOrPostRutina(r);
         return RutinaDTO.fromEntity(r);
     }

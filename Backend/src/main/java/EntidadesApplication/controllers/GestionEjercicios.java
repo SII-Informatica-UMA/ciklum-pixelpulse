@@ -8,7 +8,9 @@ import java.util.function.Function;
 import EntidadesApplication.CustomExceptions.EjercicioNotFoundException;
 import EntidadesApplication.Dtos.EjercicioDTO;
 import EntidadesApplication.Dtos.EjercicioNuevoDTO;
+import EntidadesApplication.Dtos.RutinaDTO;
 import EntidadesApplication.entities.Ejercicio;
+import EntidadesApplication.entities.Rutina;
 import EntidadesApplication.services.EjercicioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
@@ -36,7 +38,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @CrossOrigin
-@RequestMapping({"/ejercicios"})
+@RequestMapping({"/ejercicio"})
 @Tag(
         name = "Gestión de ejercicios y rutinas",
         description = "Conjunto de operaciones para la gestión de ejercicios y rutinas"
@@ -159,12 +161,15 @@ public class GestionEjercicios {
                     )}
             )}
     )
-    public EjercicioDTO actualizarEjercicio(@PathVariable Long idEjercicio, @RequestBody EjercicioDTO ejercicio) throws Exception {
-        Object EjercicioNotFoundException;
-        this.ejercicioService.getEjercicio(idEjercicio).orElseThrow(EjercicioNotFoundException::new);
-        ejercicio.setId(idEjercicio);
-        Ejercicio g = this.ejercicioService.PutorPostEjercicios(ejercicio.toEntity());
-        return EjercicioDTO.fromEntity(g);
+    public EjercicioDTO actualizarEjercicio(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @PathVariable Long idEjercicio, @RequestBody EjercicioDTO ejercicio) throws Exception {
+
+
+        Ejercicio e = ejercicio.toEntity();
+        e.setId(idEjercicio);
+        e.setIdEntrenador(idEntrenador);
+        e = this.ejercicioService.PutorPostEjercicios(e);
+        return EjercicioDTO.fromEntity(e);
+
     }
 
     @DeleteMapping({"/{idEjercicio}"})
