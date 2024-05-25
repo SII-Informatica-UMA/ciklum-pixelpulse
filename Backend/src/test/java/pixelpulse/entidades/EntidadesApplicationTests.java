@@ -95,23 +95,49 @@ class EntidadesApplicationTests {
         return peticion;
     }
 
+
+
     private <T> RequestEntity<T> post(String scheme, String host, int port, T body, String path) {
-        URI uri = uri(scheme, host, port, null, path);
+        URI uri = UriComponentsBuilder.newInstance()
+                .scheme(scheme)
+                .host(host)
+                .port(port)
+                .path(path)
+                .queryParam("entrenador", 1)
+                .build()
+                .toUri();
         return RequestEntity.post(uri).header("Authorization", "Bearer "+jwtToken)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(body);
     }
 
     private <T> RequestEntity<T> put(String scheme, String host, int port, T body, String path) {
-        URI uri = uri(scheme, host, port, null, path);
+        URI uri = UriComponentsBuilder.newInstance()
+                .scheme(scheme)
+                .host(host)
+                .port(port)
+                .path(path)
+                .queryParam("entrenador", 1)
+                .build()
+                .toUri();
         return RequestEntity.put(uri).header("Authorization", "Bearer "+jwtToken)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(body);
     }
 
     private RequestEntity<Void> delete(String scheme, String host, int port, String path) {
-        URI uri = uri(scheme, host, port, null, path);
-        return RequestEntity.delete(uri).header("Authorization", "Bearer "+jwtToken).build();
+        URI uri = UriComponentsBuilder.newInstance()
+                .scheme(scheme)
+                .host(host)
+                .port(port)
+                .path(path)
+                .queryParam("entrenador", 1)
+                .build()
+                .toUri();
+        return RequestEntity.delete(uri).header("Authorization", "Bearer "+jwtToken)
+                .accept(MediaType.APPLICATION_JSON).build();
+
+
     }
 
     @Nested
@@ -175,8 +201,11 @@ class EntidadesApplicationTests {
 
         @BeforeEach
         public void setup() {
+            ejercicioRepository.deleteAll();
             Ejercicio ejercicio = new Ejercicio();
             ejercicio.setNombre("Ejercicio 1");
+            ejercicio.setId(1L);
+            ejercicio.setIdEntrenador(1L);
             ejercicioRepository.save(ejercicio);
         }
 
@@ -185,8 +214,10 @@ class EntidadesApplicationTests {
         @DisplayName("error al tratar de insertar un ejercicio ya existente")
         @WithMockUser(roles = "ENTRENADOR")
         public void crearEjercicioExistente() {
-            EjercicioNuevoDTO nuevoEjercicio = new EjercicioNuevoDTO();
+            EjercicioDTO nuevoEjercicio = new EjercicioDTO();
             nuevoEjercicio.setNombre("Ejercicio 1");
+            nuevoEjercicio.setId(1L);
+
 
             var peticion = post("http", "localhost", port, nuevoEjercicio, "/ejercicios");
             var respuesta = restTemplate.exchange(peticion, Ejercicio.class);
@@ -227,8 +258,11 @@ class EntidadesApplicationTests {
 
         @BeforeEach
         public void setup() {
+            ejercicioRepository.deleteAll();
             Ejercicio ejercicio = new Ejercicio();
             ejercicio.setNombre("Ejercicio 1");
+            ejercicio.setId(1L);
+            ejercicio.setIdEntrenador(1L);
             ejercicioRepository.save(ejercicio);
         }
 
