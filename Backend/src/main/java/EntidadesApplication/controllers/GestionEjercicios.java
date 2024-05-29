@@ -39,10 +39,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RestController
 @CrossOrigin
 @RequestMapping({"/ejercicio"})
-@Tag(
-        name = "Gestión de ejercicios y rutinas",
-        description = "Conjunto de operaciones para la gestión de ejercicios y rutinas"
-)
 public class GestionEjercicios {
     private EjercicioService ejercicioService;
 
@@ -51,50 +47,12 @@ public class GestionEjercicios {
     }
 
     @GetMapping
-    @Operation(
-            description = "Permite consultar todos los ejercicios a un entrenador. Solo lo puede hacer el entrenador.",
-            responses = {@ApiResponse(
-                    responseCode = "200",
-                    description = "Devuelve la lista de ejercicios de un entrenador."
-            ), @ApiResponse(
-                    responseCode = "403",
-                    description = "Acceso no autorizado",
-                    content = {@Content(
-                            schema = @Schema(
-                                    implementation = Void.class
-                            )
-                    )}
-            )}
-    )
     public List<EjercicioDTO> obtenerEjercicios(@RequestParam(value = "entrenador",required = true) Long idEntrenador) {
         return this.ejercicioService.obtenerEjercicios(idEntrenador).stream().map(EjercicioDTO::fromEntity).toList();
     }
 
     @PostMapping
-    //@PreAuthorize("hasRole('ENTRENADOR')")  // Solo los entrenadores pueden crear ejercicios (No se si habría que poner esto)
-    @Operation(
-            description = "Permite crear un ejercicio nuevo a un entrenador. ",
-            responses = {@ApiResponse(
-                    responseCode = "201",
-                    description = "Se crea el ejercicio y lo devuelve",
-                    headers = {@Header(
-                            name = "Location",
-                            description = "URI del nuevo recurso",
-                            schema = @Schema(
-                                    type = "string",
-                                    subTypes = {URI.class}
-                            )
-                    )}
-            ), @ApiResponse(
-                    responseCode = "403",
-                    description = "Acceso no autorizado",
-                    content = {@Content(
-                            schema = @Schema(
-                                    implementation = Void.class
-                            )
-                    )}
-            )}
-    )
+    //@PreAuthorize("hasRole('ENTRENADOR')")  // Solo los entrenadores pueden crear ejercicios
      public ResponseEntity<EjercicioDTO> crearEjercicio(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @RequestBody EjercicioNuevoDTO ejercicioNuevoDTO, UriComponentsBuilder uriBuilder) throws Exception {
         Ejercicio g = ejercicioNuevoDTO.toEntity();
         g.setId((Long)null);
@@ -110,60 +68,12 @@ public class GestionEjercicios {
     }
 
     @GetMapping({"/{idEjercicio}"})
-    @Operation(
-            description = "Obtiene un ejercicio concreto. Sollo pued ehacerlo el entrenador que lo ha creado y los clientes que entrena.",
-            responses = {@ApiResponse(
-                    responseCode = "200",
-                    description = "El ejercicio existe"
-            ), @ApiResponse(
-                    responseCode = "404",
-                    description = "El ejercicio no existe",
-                    content = {@Content(
-                            schema = @Schema(
-                                    implementation = Void.class
-                            )
-                    )}
-            ), @ApiResponse(
-                    responseCode = "403",
-                    description = "Acceso no autorizado",
-                    content = {@Content(
-                            schema = @Schema(
-                                    implementation = Void.class
-                            )
-                    )}
-            )}
-    )
-    public ResponseEntity<EjercicioDTO> getEjercicio(@PathVariable Long idEjercicio) {
+    public ResponseEntity<EjercicioDTO> obtenerEjercicio(@PathVariable Long idEjercicio) {
         return ResponseEntity.of(this.ejercicioService.getEjercicio(idEjercicio).map(EjercicioDTO::fromEntity));
     }
 
     @PutMapping({"/{idEjercicio}"})
-    @Operation(
-            description = "Actualiza un ejercicio. Solo puede hacerlo el entrenador que lo ha creado.",
-            responses = {@ApiResponse(
-                    responseCode = "200",
-                    description = "El ejercicio se ha actualizado"
-            ), @ApiResponse(
-                    responseCode = "404",
-                    description = "El ejercicio no existe",
-                    content = {@Content(
-                            schema = @Schema(
-                                    implementation = Void.class
-                            )
-                    )}
-            ), @ApiResponse(
-                    responseCode = "403",
-                    description = "Acceso no autorizado",
-                    content = {@Content(
-                            schema = @Schema(
-                                    implementation = Void.class
-                            )
-                    )}
-            )}
-    )
     public EjercicioDTO actualizarEjercicio(@RequestParam(value = "entrenador",required = true) Long idEntrenador, @PathVariable Long idEjercicio, @RequestBody EjercicioDTO ejercicio) throws Exception {
-
-
         Ejercicio e = ejercicio.toEntity();
         e.setId(idEjercicio);
         e.setIdEntrenador(idEntrenador);
@@ -173,29 +83,6 @@ public class GestionEjercicios {
     }
 
     @DeleteMapping({"/{idEjercicio}"})
-    @Operation(
-            description = "Elimina el ejercicio. Solo puede hacerlo el entrenador que lo ha creado.",
-            responses = {@ApiResponse(
-                    responseCode = "200",
-                    description = "El ejercicio se ha elminado"
-            ), @ApiResponse(
-                    responseCode = "404",
-                    description = "El ejercicio no existe",
-                    content = {@Content(
-                            schema = @Schema(
-                                    implementation = Void.class
-                            )
-                    )}
-            ), @ApiResponse(
-                    responseCode = "403",
-                    description = "Acceso no autorizado",
-                    content = {@Content(
-                            schema = @Schema(
-                                    implementation = Void.class
-                            )
-                    )}
-            )}
-    )
     public void eliminarEjercicio(@PathVariable Long idEjercicio) throws Exception {
         this.ejercicioService.getEjercicio(idEjercicio).orElseThrow(EjercicioNotFoundException::new);
         this.ejercicioService.EliminarEjercicio(idEjercicio);
