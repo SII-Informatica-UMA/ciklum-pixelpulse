@@ -20,18 +20,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -47,8 +37,8 @@ public class GestionEjercicios {
     }
 
     @GetMapping
-    public List<EjercicioDTO> obtenerEjercicios(@RequestParam(value = "entrenador",required = true) Long idEntrenador) {
-        return this.ejercicioService.obtenerEjercicios(idEntrenador).stream().map(EjercicioDTO::fromEntity).toList();
+    public List<EjercicioDTO> obtenerEjercicios(@RequestParam(value = "entrenador",required = true) Long idEntrenador,@RequestHeader(name="Authorization") String token) {
+        return this.ejercicioService.obtenerEjercicios(idEntrenador,token.substring(7)).stream().map(EjercicioDTO::fromEntity).toList();
     }
 
     @PostMapping
@@ -68,8 +58,8 @@ public class GestionEjercicios {
     }
 
     @GetMapping({"/{idEjercicio}"})
-    public ResponseEntity<EjercicioDTO> obtenerEjercicio(@PathVariable Long idEjercicio) {
-        return ResponseEntity.of(this.ejercicioService.getEjercicio(idEjercicio).map(EjercicioDTO::fromEntity));
+    public ResponseEntity<EjercicioDTO> obtenerEjercicio(@PathVariable Long idEjercicio,@RequestHeader(name="Authorization") String token) {
+        return ResponseEntity.of(this.ejercicioService.getEjercicio(idEjercicio,token.substring(7)).map(EjercicioDTO::fromEntity));
     }
 
     @PutMapping({"/{idEjercicio}"})
@@ -83,8 +73,8 @@ public class GestionEjercicios {
     }
 
     @DeleteMapping({"/{idEjercicio}"})
-    public void eliminarEjercicio(@PathVariable Long idEjercicio) throws Exception {
-        this.ejercicioService.getEjercicio(idEjercicio).orElseThrow(EjercicioNotFoundException::new);
+    public void eliminarEjercicio(@PathVariable Long idEjercicio,@RequestHeader(name="Authorization") String token) throws Exception {
+        this.ejercicioService.getEjercicio(idEjercicio,token.substring(7)).orElseThrow(EjercicioNotFoundException::new);
         this.ejercicioService.EliminarEjercicio(idEjercicio);
     }
 
