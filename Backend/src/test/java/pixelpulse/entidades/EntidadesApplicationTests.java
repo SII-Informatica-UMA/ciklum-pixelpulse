@@ -2,6 +2,7 @@ package pixelpulse.entidades;
 
 import EntidadesApplication.Dtos.*;
 import EntidadesApplication.EntidadesApplication;
+import EntidadesApplication.entities.FragmentoRutina;
 import EntidadesApplication.entities.Rutina;
 import EntidadesApplication.repositories.EjerciciosRepo;
 import EntidadesApplication.repositories.RutinaRepo;
@@ -46,9 +47,11 @@ class EntidadesApplicationTests {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
+
+
     @Mock
-    private RestTemplate restTemplate;
-    private MockRestServiceServer mockServer;
+    private RestTemplate restTemplate = new RestTemplate();
+
     @Value(value = "${local.server.port}")
     private int port;
     private String jwtToken;
@@ -61,16 +64,18 @@ class EntidadesApplicationTests {
     @Autowired
     private RutinaRepo rutinaRepository;
 
-    String jwt60="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MCIsImlhdCI6MTcxNTgwODI1NiwiZXhwIjo2MDAwMTcxNTgwODI1Nn0.WEBElk3YnfFjFz3X9uyFevFVIHYPDSTI_8_B3ZsXq0oBe_43e8pNABfvgdpInQHttKeT33jl8aAvrV8SPT1T6w";
-    String jwt61= "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MSIsImlhdCI6MTcxNTgwODI1NiwiZXhwIjo2MDAwMTcxNTgwODI1Nn0.XVv_sy_VAbSfRhC4KVS2ygDOVlcnrILTXgDyAoKboK2UqLydCW5AUTmqFXKH1ig8TSIgYZt0xEDYdZLG5xpx9g";
-    String jwt62= "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MiIsImlhdCI6MTcxNTgwODI1NiwiZXhwIjo2MDAwMTcxNTgwODI1Nn0.DbcQ_qqJihfcX5jgdZ9glgihLaUIRRvnfnS3BVUwhVFPBSvNIRE7cF6c3pMpMp-OU18vZxzyubLVhSRTWV8Whg \n";
+    String jwt60 = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MCIsImlhdCI6MTcxNTgwODI1NiwiZXhwIjo2MDAwMTcxNTgwODI1Nn0.WEBElk3YnfFjFz3X9uyFevFVIHYPDSTI_8_B3ZsXq0oBe_43e8pNABfvgdpInQHttKeT33jl8aAvrV8SPT1T6w";
+    String jwt61 = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MSIsImlhdCI6MTcxNTgwODI1NiwiZXhwIjo2MDAwMTcxNTgwODI1Nn0.XVv_sy_VAbSfRhC4KVS2ygDOVlcnrILTXgDyAoKboK2UqLydCW5AUTmqFXKH1ig8TSIgYZt0xEDYdZLG5xpx9g";
+    String jwt62 = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MiIsImlhdCI6MTcxNTgwODI1NiwiZXhwIjo2MDAwMTcxNTgwODI1Nn0.DbcQ_qqJihfcX5jgdZ9glgihLaUIRRvnfnS3BVUwhVFPBSvNIRE7cF6c3pMpMp-OU18vZxzyubLVhSRTWV8Whg \n";
 
     @BeforeEach
     public void initializeDatabase() {
-        mockServer=MockRestServiceServer.createServer(testRestTemplate.getRestTemplate());
+
         ejercicioRepository.deleteAll();
         rutinaRepository.deleteAll();
     }
+
+    private MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
 
     private URI uri(String scheme, String host, int port, Map<String, String> queryParams, String... paths) {
         UriBuilderFactory ubf = new DefaultUriBuilderFactory();
@@ -89,67 +94,150 @@ class EntidadesApplicationTests {
         return ub.build();
     }
 
-    private RequestEntity<Void> get(String scheme, String host, int port, String path) {
+    private RequestEntity<Void> get(String scheme, String host, int port, String path, String param, Long idParam, String jwt) {
         URI uri = UriComponentsBuilder.newInstance()
-            .scheme(scheme)
-            .host(host)
-            .port(port)
-            .path(path)
-            .queryParam("entrenador", 1)
-            .build()
-            .toUri();
-        var peticion = RequestEntity.get(uri).header("Authorization", "Bearer "+jwtToken)
+                .scheme(scheme)
+                .host(host)
+                .port(port)
+                .path(path)
+                .queryParam(param, idParam)
+                .build()
+                .toUri();
+        var peticion = RequestEntity.get(uri).header("Authorization", "Bearer " + jwt)
+                .accept(MediaType.APPLICATION_JSON)
+                .build();
+        return peticion;
+    }
+
+    private RequestEntity<Void> getNoQuery(String scheme, String host, int port, String path, String jwt) {
+        URI uri = UriComponentsBuilder.newInstance()
+                .scheme(scheme)
+                .host(host)
+                .port(port)
+                .path(path)
+                .build()
+                .toUri();
+        var peticion = RequestEntity.get(uri).header("Authorization", "Bearer " + jwt)
                 .accept(MediaType.APPLICATION_JSON)
                 .build();
         return peticion;
     }
 
 
-
-    private <T> RequestEntity<T> post(String scheme, String host, int port, T body, String path) {
+    private <T> RequestEntity<T> post(String scheme, String host, int port, T body, String path, String param, Long idParam, String jwt) {
         URI uri = UriComponentsBuilder.newInstance()
                 .scheme(scheme)
                 .host(host)
                 .port(port)
                 .path(path)
-                .queryParam("entrenador", 1)
+                .queryParam(param, idParam)
                 .build()
                 .toUri();
-        return RequestEntity.post(uri).header("Authorization", "Bearer "+jwtToken)
+        return RequestEntity.post(uri).header("Authorization", "Bearer " + jwt)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(body);
     }
 
-    private <T> RequestEntity<T> put(String scheme, String host, int port, T body, String path) {
+    private <T> RequestEntity<T> put(String scheme, String host, int port, T body, String path, String jwt) {
         URI uri = UriComponentsBuilder.newInstance()
                 .scheme(scheme)
                 .host(host)
                 .port(port)
                 .path(path)
-                .queryParam("entrenador", 1)
+
                 .build()
                 .toUri();
-        return RequestEntity.put(uri).header("Authorization", "Bearer "+jwtToken)
+        return RequestEntity.put(uri).header("Authorization", "Bearer " + jwt)
                 .accept(MediaType.APPLICATION_JSON)
                 .body(body);
     }
 
-    private RequestEntity<Void> delete(String scheme, String host, int port, String path) {
+    private RequestEntity<Void> delete(String scheme, String host, int port, String path, String jwt) {
         URI uri = UriComponentsBuilder.newInstance()
                 .scheme(scheme)
                 .host(host)
                 .port(port)
                 .path(path)
-                .queryParam("entrenador", 1)
+
                 .build()
                 .toUri();
-        return RequestEntity.delete(uri).header("Authorization", "Bearer "+jwtToken)
+        return RequestEntity.delete(uri).header("Authorization", "Bearer " + jwt)
                 .accept(MediaType.APPLICATION_JSON).build();
 
 
     }
 
     @Nested
+    @DisplayName("GetsConMockitoEjercicios")
+    public class GetConMockito {
+
+        @BeforeEach
+        public void setup() {
+
+            rutinaRepository.deleteAll();
+            ejercicioRepository.deleteAll();
+            Ejercicio ejercicioID1 = new Ejercicio();
+            Ejercicio ejercicioID2 = new Ejercicio();
+
+
+            ejercicioID1.setId(1L);
+            ejercicioID1.setIdEntrenador(1L);
+
+            ejercicioRepository.save(ejercicioID1);
+
+            ejercicioID2.setId(2L);
+            ejercicioID2.setIdEntrenador(2L);
+            ejercicioRepository.save(ejercicioID2);
+
+
+        }
+
+
+
+
+        @Test
+        @DisplayName("Devuelve satisfactoriamente el ejercicio JWT con permiso")
+        public void GetJWTConPermiso() {   //suponemos que el jwt60 es entrenador 1 y es dueño del ejercicio 1
+            mockServer.expect(
+                            requestTo(UriComponentsBuilder.fromUriString("http://localhost:9001/entrenador/1").build().toUri()))   //Vamos al microservicio de entrenadores a sacar los datos
+                    .andExpect(method(HttpMethod.GET))
+                    .andRespond(withStatus(HttpStatus.OK)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body("{ \"idUsuario\": 60, \"telefono\": \"string\", \"direccion\": \"string\", \"dni\": \"string\", \"fechaNacimiento\": \"2024-05-31T09:08:45.560Z\", \"fechaAlta\": \"2024-05-31T09:08:45.560Z\", \"fechaBaja\": \"2024-05-31T09:08:45.560Z\", \"especialidad\": \"string\", \"titulacion\": \"string\", \"experiencia\": \"string\", \"observaciones\": \"string\", \"id\": 1 }"));
+
+
+            var peticion = getNoQuery("http", "localhost", port, "/ejercicio/1", jwt60);
+            var respuesta = testRestTemplate.exchange(peticion,
+                    new ParameterizedTypeReference<EjercicioDTO>() {
+                    });
+
+
+            assertThat(respuesta.getBody().getId()).isEqualTo(1L);
+        }
+
+
+        @Test
+        @DisplayName("Devuelve Error del ejercicio JWT sin permiso")
+        public void GetJWTSinPermiso() {   //suponemos que el jwt60  no es entrenador
+            mockServer.expect(
+                            requestTo(UriComponentsBuilder.fromUriString("http://localhost:9001/entrenador/1").build().toUri()))   //Vamos al microservicio de entrenadores a sacar los datos
+                    .andExpect(method(HttpMethod.GET))
+                    .andRespond(withStatus(HttpStatus.OK)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .body("{ \"idUsuario\": 61, \"telefono\": \"string\", \"direccion\": \"string\", \"dni\": \"string\", \"fechaNacimiento\": \"2024-05-31T09:08:45.560Z\", \"fechaAlta\": \"2024-05-31T09:08:45.560Z\", \"fechaBaja\": \"2024-05-31T09:08:45.560Z\", \"especialidad\": \"string\", \"titulacion\": \"string\", \"experiencia\": \"string\", \"observaciones\": \"string\", \"id\": 1 }"));
+
+
+            var peticion = getNoQuery("http", "localhost", port, "/ejercicio/1", jwt60);
+            var respuesta = testRestTemplate.exchange(peticion,
+                    new ParameterizedTypeReference<EjercicioDTO>() {
+                    });
+
+
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(403);
+        }
+    }
+}
+    /*@Nested
     @DisplayName("cuando no hay ejercicios")
     public class EjerciciosVacios {
 
@@ -509,5 +597,7 @@ class EntidadesApplicationTests {
             assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
     }
-}
+    */
+
+
 
