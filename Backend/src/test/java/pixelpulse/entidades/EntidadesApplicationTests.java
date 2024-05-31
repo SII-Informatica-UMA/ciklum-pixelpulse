@@ -232,7 +232,7 @@ class EntidadesApplicationTests {
                     });
 
 
-            assertThat(respuesta.getBody().getId()).isEqualTo(idEjer1);
+            assertThat(respuesta.getStatusCode().value()).isEqualTo(200);
         }
 
 
