@@ -56,6 +56,7 @@ public class EjercicioService {
             return Optional.empty();
         }
 
+
         if(!(comprobarGet(id,jwt)))  throw new ForbbidenException();
 
 
@@ -147,6 +148,7 @@ public class EjercicioService {
 
         String respuestaUsuario = respuesta.getBody().getIdUsuario().toString();
         String respuestaEntrenador = respuesta.getBody().getId().toString();
+
 
         if( (respuesta.getStatusCode().value() != 200 || respuesta.getStatusCode().value() != 201) && (!(idusuario.equals(respuestaUsuario)))){  //Si el usuario no es un entrenador
             return false;
