@@ -14,7 +14,4 @@ import org.springframework.stereotype.Repository;
 public interface EjerciciosRepo extends JpaRepository<Ejercicio, Long> {
     List<Ejercicio> findByIdEntrenador(Long idEntrenador);
 
-
-
-
 }

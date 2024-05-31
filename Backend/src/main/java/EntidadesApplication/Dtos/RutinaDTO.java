@@ -12,7 +12,7 @@ public class RutinaDTO extends RutinaNuevaDTO {
         this.id = id;
     }
 
-    public Rutina toEntity() {
+    public  Rutina toEntity() {
         return Rutina.builder().id(this.id).nombre(this.getNombre()).descripcion(this.getDescripcion()).observaciones(this.getObservaciones()).ejercicios(FragmentoRutinaDTO.toEntityList(this.getEjercicios())).build();
     }
 
