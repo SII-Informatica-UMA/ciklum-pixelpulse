@@ -10,6 +10,7 @@ import EntidadesApplication.repositories.RutinaRepo;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import EntidadesApplication.entities.Ejercicio;
 import EntidadesApplication.services.EjercicioService;
@@ -43,7 +44,8 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @SpringBootTest(classes = EntidadesApplication.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DisplayName("En el servicio de Gestion y Ejercicios")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-class EntidadesApplicationTests {
+
+public class EntidadesApplicationTests {
 
     Long idEjer1 = null;
     Long idEjer2 = null;
@@ -167,7 +169,7 @@ class EntidadesApplicationTests {
 
     @Nested
     @DisplayName("GET/ejercicio/{idejercicio}")
-    public class GetConMockito {
+    public class GetConMockitoNestedTest {
 
         @BeforeEach
         public void setup() {
@@ -196,7 +198,7 @@ class EntidadesApplicationTests {
 
         @Test
         @DisplayName("Devuelve error ejercicio no existe")
-        public void GetEjercicioNoExist() {
+        public void GetEjercicioNoExistTest() {
             mockServer.expect(
                             requestTo(UriComponentsBuilder.fromUriString("http://localhost:9001/entrenador/1").build().toUri()))   //Vamos al microservicio de entrenadores a sacar los datos
                     .andExpect(method(HttpMethod.GET))
@@ -217,7 +219,7 @@ class EntidadesApplicationTests {
 
         @Test
         @DisplayName("Devuelve satisfactoriamente el ejercicio JWT con permiso")
-        public void GetJWTConPermiso() {   //suponemos que el jwt60 es entrenador 1 y es dueño del ejercicio 1
+        public void GetJWTConPermisoTest() {   //suponemos que el jwt60 es entrenador 1 y es dueño del ejercicio 1
             mockServer.expect(
                             requestTo(UriComponentsBuilder.fromUriString("http://localhost:9001/entrenador/1").build().toUri()))   //Vamos al microservicio de entrenadores a sacar los datos
                     .andExpect(method(HttpMethod.GET))
@@ -238,7 +240,7 @@ class EntidadesApplicationTests {
 
         @Test
         @DisplayName("Devuelve Error del ejercicio JWT sin permiso")
-        public void GetJWTSinPermiso() {   //intentamos el mismo ejercicio con JWT sin permiso
+        public void GetJWTSinPermisoTest() {   //intentamos el mismo ejercicio con JWT sin permiso
             mockServer.expect(
                             requestTo(UriComponentsBuilder.fromUriString("http://localhost:9001/entrenador/1").build().toUri()))   //Vamos al microservicio de entrenadores a sacar los datos
                     .andExpect(method(HttpMethod.GET))
@@ -262,7 +264,38 @@ class EntidadesApplicationTests {
 
 
     }
+
+    /*@Nested
+    @DisplayName("Put/ejercicio/{idejercicio}")
+    public class PutConMockito {
+
+        @BeforeEach
+        public void setup() {
+            MockRestServiceServer mockServer = MockRestServiceServer.createServer(restTemplate);
+            rutinaRepository.deleteAll();
+            ejercicioRepository.deleteAll();
+            Ejercicio ejercicioID1 = new Ejercicio();
+            Ejercicio ejercicioID2 = new Ejercicio();
+
+
+            ejercicioID1.setIdEntrenador(1L);
+
+
+            Ejercicio ej1 = ejercicioRepository.saveAndFlush(ejercicioID1);
+            idEjer1 = ej1.getId();
+
+
+            ejercicioID2.setIdEntrenador(2L);
+            Ejercicio ej2 = ejercicioRepository.saveAndFlush(ejercicioID2);
+            idEjer2 = ej2.getId();
+
+        }
+
+
+    }
+    */
 }
+
 
 
 
