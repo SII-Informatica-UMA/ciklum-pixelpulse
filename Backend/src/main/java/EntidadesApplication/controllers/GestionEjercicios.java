@@ -29,6 +29,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.*;
 
+import static EntidadesApplication.security.SecurityConfiguration.getAuthenticatedUser;
+
 
 @RestController
 @CrossOrigin
@@ -44,7 +46,7 @@ public class GestionEjercicios {
 
     @GetMapping
     public ResponseEntity<List<EjercicioDTO>>obtenerEjercicios(@RequestParam(value = "entrenador",required = true) Long idEntrenador,@RequestHeader(name="Authorization") String token) {
-
+        getAuthenticatedUser();
         if (!ejerciciosRepo.findByIdEntrenador(idEntrenador).isEmpty()) {
             List<EjercicioDTO> lista = this.ejercicioService.obtenerEjercicios(idEntrenador,token.substring(7)).stream().map(EjercicioDTO::fromEntity).toList();
             return ResponseEntity.ok(lista);
@@ -70,13 +72,16 @@ public class GestionEjercicios {
         };
     }
 
+
     @GetMapping({"/{idEjercicio}"})
     public ResponseEntity<EjercicioDTO> obtenerEjercicio(@PathVariable Long idEjercicio,@RequestHeader(name="Authorization") String token) {
+        getAuthenticatedUser();
         return ResponseEntity.of(this.ejercicioService.getEjercicio(idEjercicio,token.substring(7)).map(EjercicioDTO::fromEntity));
     }
 
     @PutMapping({"/{idEjercicio}"})
     public ResponseEntity<EjercicioDTO> actualizarEjercicio( @PathVariable Long idEjercicio, @RequestBody EjercicioDTO ejercicio,@RequestHeader(name="Authorization") String token) {
+        getAuthenticatedUser();
         Ejercicio e = ejercicio.toEntity();
         e.setId(idEjercicio);
 
@@ -95,7 +100,7 @@ public class GestionEjercicios {
 
     @DeleteMapping({"/{idEjercicio}"})
     public ResponseEntity<Void> eliminarEjercicio(@PathVariable Long idEjercicio,@RequestHeader(name="Authorization") String token) throws Exception {
-
+        getAuthenticatedUser();
            if(ejerciciosRepo.findById(idEjercicio).isPresent()) {
 
                    this.ejercicioService.getEjercicio(idEjercicio, token.substring(7));

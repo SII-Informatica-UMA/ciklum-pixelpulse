@@ -61,13 +61,15 @@ class EntidadesApplicationTests {
     @Autowired
     private RutinaRepo rutinaRepository;
 
+    String jwt60="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MCIsImlhdCI6MTcxNTgwODI1NiwiZXhwIjo2MDAwMTcxNTgwODI1Nn0.WEBElk3YnfFjFz3X9uyFevFVIHYPDSTI_8_B3ZsXq0oBe_43e8pNABfvgdpInQHttKeT33jl8aAvrV8SPT1T6w";
+    String jwt61= "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MSIsImlhdCI6MTcxNTgwODI1NiwiZXhwIjo2MDAwMTcxNTgwODI1Nn0.XVv_sy_VAbSfRhC4KVS2ygDOVlcnrILTXgDyAoKboK2UqLydCW5AUTmqFXKH1ig8TSIgYZt0xEDYdZLG5xpx9g";
+    String jwt62= "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2MiIsImlhdCI6MTcxNTgwODI1NiwiZXhwIjo2MDAwMTcxNTgwODI1Nn0.DbcQ_qqJihfcX5jgdZ9glgihLaUIRRvnfnS3BVUwhVFPBSvNIRE7cF6c3pMpMp-OU18vZxzyubLVhSRTWV8Whg \n";
+
     @BeforeEach
     public void initializeDatabase() {
         mockServer=MockRestServiceServer.createServer(testRestTemplate.getRestTemplate());
         ejercicioRepository.deleteAll();
         rutinaRepository.deleteAll();
-        jwtToken="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE1ODA4MjU2LCJleHAiOjYwMDAxNzE1ODA4MjU2fQ.TlGrRwC7BI0maP--cNOepyOGneYY9bTI4Zke6DTVw-T59FhS4QjjFN7NTm6GhcfxDmPbD2jcLdebzS8TXvEnbQ";
-
     }
 
     private URI uri(String scheme, String host, int port, Map<String, String> queryParams, String... paths) {

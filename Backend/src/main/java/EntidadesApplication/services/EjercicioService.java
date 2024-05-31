@@ -64,7 +64,7 @@ public class EjercicioService {
 
 
     public List<Ejercicio> obtenerEjercicios(Long idEntrenador, String jwt) throws ForbbidenException {
-        System.out.println(jwtUtil.getUsernameFromToken(jwt));
+
         String idUsuario = jwtUtil.getUsernameFromToken(jwt);
         if(!(esEntrenador(idEntrenador,idUsuario,jwt))) throw new ForbbidenException();
 
@@ -151,7 +151,7 @@ public class EjercicioService {
         if( (respuesta.getStatusCode().value() != 200 || respuesta.getStatusCode().value() != 201) && (!(idusuario.equals(respuestaUsuario)))){  //Si el usuario no es un entrenador
             return false;
         }
-        if(!(respuestaEntrenador.equals(ejerciciosRepo.findById(id_ejercicio).get().getIdEntrenador().toString()))){  //Si el ejercicio no pertenece al entrenador, devuelve false
+        if(!(respuestaEntrenador.equals(idEntrenador))){  //Si el ejercicio no pertenece al entrenador, devuelve false
             return false;
         }
 

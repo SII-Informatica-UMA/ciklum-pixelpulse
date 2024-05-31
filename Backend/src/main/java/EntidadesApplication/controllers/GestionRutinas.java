@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import static EntidadesApplication.security.SecurityConfiguration.getAuthenticatedUser;
 
 
 @RestController
@@ -46,6 +47,7 @@ public class GestionRutinas {
 
     @GetMapping
     public ResponseEntity<List<RutinaDTO>>  obtenerRutinas(@RequestHeader(name="Authorization") String token, @RequestParam(value = "entrenador",required = true) Long idEntrenador) {
+        getAuthenticatedUser();
         if (!rutinaRepo.findByIdEntrenador(idEntrenador).isEmpty()) {
             List<RutinaDTO> lista = this.rutinaService.GetRutinas(idEntrenador,token.substring(7)).stream().map(RutinaDTO::fromEntity).toList();
             return ResponseEntity.ok(lista);
@@ -55,6 +57,7 @@ public class GestionRutinas {
 
     @PostMapping
     public ResponseEntity<RutinaDTO> crearRutina(@RequestHeader(name="Authorization") String token,@RequestParam(value = "entrenador",required = true) Long idEntrenador, @RequestBody RutinaNuevaDTO rutinaNuevaDTO, UriComponentsBuilder uriBuilder) {
+        getAuthenticatedUser();
         Rutina rutina = rutinaNuevaDTO.toEntity();
         rutina.setIdEntrenador(idEntrenador);
         rutina.setId((Long)null);
@@ -84,11 +87,13 @@ public class GestionRutinas {
 
     @GetMapping({"/{idRutina}"})
     public ResponseEntity<RutinaDTO> obtenerRutina(@RequestHeader(name="Authorization") String token,@PathVariable Long idRutina) {
+        getAuthenticatedUser();
         return ResponseEntity.of(this.rutinaService.GetRutina(idRutina,token.substring(7)).map(RutinaDTO::fromEntity));
     }
 
     @PutMapping({"/{idRutina}"})
     public ResponseEntity<RutinaDTO>  actualizarRutina(@RequestHeader(name="Authorization") String token, @PathVariable Long idRutina, @RequestBody RutinaDTO rutina) {
+        getAuthenticatedUser();
         Rutina e = rutina.toEntity();
         e.setId(idRutina);
 
@@ -105,6 +110,7 @@ public class GestionRutinas {
 
     @DeleteMapping({"/{idRutina}"})
     public ResponseEntity<Void> eliminarRutina(@RequestHeader(name="Authorization") String token,@PathVariable Long idRutina) {
+        getAuthenticatedUser();
         if(rutinaRepo.findById(idRutina).isPresent()) {
 
             this.rutinaService.GetRutina(idRutina, token.substring(7));
